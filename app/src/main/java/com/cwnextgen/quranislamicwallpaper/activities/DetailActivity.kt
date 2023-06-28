@@ -20,6 +20,8 @@ import com.cwnextgen.quranislamicwallpaper.utils.AppConstants
 import com.cwnextgen.quranislamicwallpaper.utils.ShareImage.getBitmapFromView
 import com.cwnextgen.quranislamicwallpaper.utils.genericDialog
 import com.cwnextgen.quranislamicwallpaper.utils.openAppSettings
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -40,6 +42,9 @@ class DetailActivity : BaseActivity() {
         askWallpaperPermission()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     override fun clicks() {
@@ -176,5 +181,25 @@ class DetailActivity : BaseActivity() {
             getString(R.string.open_settings),
             getString(R.string.cancel)
         )
+    }
+
+
+
+    // Called when leaving the activity
+    public override fun onPause() {
+        binding.adView.pause()
+        super.onPause()
+    }
+
+    // Called when returning to the activity
+    public override fun onResume() {
+        super.onResume()
+        binding.adView.resume()
+    }
+
+    // Called before the activity is destroyed
+    public override fun onDestroy() {
+        binding.adView.destroy()
+        super.onDestroy()
     }
 }

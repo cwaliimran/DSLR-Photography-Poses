@@ -19,7 +19,15 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    signingConfigs {
+        create("release") {
+            //organization quranwallpaper
+            keyAlias 'quranwallpaper'
+            keyPassword 'qur@nw@llp@per'
+            storePassword 'qur@nw@llp@per'
+            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/QuranWallpaper/key-quranwallpaper.jks")
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
