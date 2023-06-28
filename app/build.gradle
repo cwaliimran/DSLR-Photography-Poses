@@ -57,6 +57,7 @@ android {
         }
         admin { //use this flavor for uploading wallpapers
             dimension 'wallpaper'
+            applicationIdSuffix '.admin'
         }
     }
 

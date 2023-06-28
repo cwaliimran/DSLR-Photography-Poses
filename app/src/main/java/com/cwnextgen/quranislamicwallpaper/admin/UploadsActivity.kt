@@ -1,8 +1,10 @@
 package com.cwnextgen.quranislamicwallpaper.admin
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,6 +21,7 @@ import com.cwnextgen.quranislamicwallpaper.utils.getPicker
 import com.cwnextgen.quranislamicwallpaper.utils.showToast
 import com.cwnextgen.quranislamicwallpaper.utils.storage
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
 import java.io.File
@@ -33,11 +36,59 @@ class UploadsActivity : AppCompatActivity() {
         binding = ActivityUploadsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      //  signUpOrLogin("quranwallpaper@admin.com", "quran6666wallpaper")
+        //  signUpOrLogin("quranwallpaper@admin.com", "quran6666wallpaper")
         binding.button1.setOnClickListener {
-            getPicker().galleryOnly().createIntent { intent ->
-                startForProfileImageResult.launch(intent)
-            }
+//            getPicker().galleryOnly().createIntent { intent ->
+//                startForProfileImageResult.launch(intent)
+//            }
+
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, 300)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 300 && resultCode == Activity.RESULT_OK && data != null) {
+            val imageUri = data.data
+            uploadImageToFirebaseStorage(imageUri)
+        }
+    }
+
+    private fun uploadImageToFirebaseStorage(imageUri: Uri?) {
+
+        if (imageUri != null) {
+            displayLoading()
+
+            val storageRef = FirebaseStorage.getInstance().reference
+            val imageRef = storageRef.child("wallpapers/${generateUUID()}+.jpg")
+
+            imageRef.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
+                    displayLoading(false)
+
+                    // Image upload successful
+                    val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
+                    imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                        val imageUrl = downloadUri.toString()
+                        Glide.with(this).load(imageUrl).into(binding.imageView)
+                        // Do something with the image URL, like saving it to a database
+                        val mainModel = MainModel(generateUUID(), imageUrl, "")
+                        saveData(mainModel)
+                    }
+                }.addOnFailureListener { exception ->
+                    displayLoading(false)
+                    // Handle the upload failure
+                    Log.d(TAG, "uploadImage: " + exception)
+
+
+                }
+
+                .addOnFailureListener { exception ->
+                    displayLoading(false)
+                    Log.d(TAG, "uploadImageToFirebaseStorage: " + exception.localizedMessage)
+                    // Image upload failed
+                    // Handle the error accordingly
+                }
         }
     }
 
