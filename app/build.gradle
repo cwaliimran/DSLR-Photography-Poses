@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -38,6 +39,18 @@ android {
         dataBinding = true
         buildConfig true
     }
+    flavorDimensions 'wallpaper'
+    productFlavors {
+        admin {
+            dimension 'wallpaper'
+        }
+        dev {
+            dimension 'wallpaper'
+        }
+        prod {
+            dimension 'wallpaper'
+        }
+    }
 
 }
 
@@ -47,14 +60,29 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
     implementation 'com.google.firebase:firebase-storage-ktx:20.2.1'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.7'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.3.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx:20.3.2'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
-    implementation 'com.google.android.gms:play-services-ads:22.1.0'
     implementation 'com.google.firebase:firebase-firestore:24.6.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.google.firebase:firebase-bom:32.1.1'
+    implementation 'com.google.android.gms:play-services-cloud-messaging:17.0.2'
+
+    implementation 'com.google.android.gms:play-services-ads:22.1.0'
+
+    //gif/image loading libraries
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    kapt 'com.github.bumptech.glide:compiler:4.15.1'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+
+
 }
