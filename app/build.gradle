@@ -41,13 +41,13 @@ android {
     }
     flavorDimensions 'wallpaper'
     productFlavors {
-        admin {
-            dimension 'wallpaper'
-        }
         dev {
             dimension 'wallpaper'
         }
         prod {
+            dimension 'wallpaper'
+        }
+        admin { //use this flavor for uploading wallpapers
             dimension 'wallpaper'
         }
     }

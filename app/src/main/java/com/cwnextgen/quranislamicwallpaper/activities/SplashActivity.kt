@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            if (BuildConfig.FLAVOR== "dev"){
+            if (BuildConfig.FLAVOR== "admin"){
 
                 val intent = Intent(this, UploadsActivity::class.java)
                 startActivity(intent)
