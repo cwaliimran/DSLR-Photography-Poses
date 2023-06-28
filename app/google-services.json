@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421281449183",
+    "project_id": "quran-wallpaper",
+    "storage_bucket": "quran-wallpaper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421281449183:android:17807d2779528c0e25956a",
+        "android_client_info": {
+          "package_name": "com.cwnextgen.quranislamicwallpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421281449183-71kod1a1jv16ogh0m05090hncpo0sogd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm1__ZjrKvvWIh5FhBqduLQn9bmoRDku4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421281449183-71kod1a1jv16ogh0m05090hncpo0sogd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
