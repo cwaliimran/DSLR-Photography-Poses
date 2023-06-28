@@ -12,28 +12,32 @@ import com.cwnextgen.quranislamicwallpaper.databinding.ActivityUploadsBinding
 import com.cwnextgen.quranislamicwallpaper.models.MainModel
 import com.cwnextgen.quranislamicwallpaper.utils.AppConstants
 import com.cwnextgen.quranislamicwallpaper.utils.ProgressLoading.displayLoading
+import com.cwnextgen.quranislamicwallpaper.utils.auth
 import com.cwnextgen.quranislamicwallpaper.utils.firestore
 import com.cwnextgen.quranislamicwallpaper.utils.generateUUID
 import com.cwnextgen.quranislamicwallpaper.utils.getPicker
 import com.cwnextgen.quranislamicwallpaper.utils.showToast
 import com.cwnextgen.quranislamicwallpaper.utils.storage
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
 import java.io.File
+import java.util.Date
 
 class UploadsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadsBinding
+    private val TAG = "UploadsActivityTAG"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityUploadsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+      //  signUpOrLogin("quranwallpaper@admin.com", "quran6666wallpaper")
         binding.button1.setOnClickListener {
-
             getPicker().galleryOnly().createIntent { intent ->
-                    startForProfileImageResult.launch(intent)
-                }
+                startForProfileImageResult.launch(intent)
+            }
         }
     }
 
@@ -78,6 +82,24 @@ class UploadsActivity : AppCompatActivity() {
         }.addOnFailureListener { exception ->
             displayLoading(false)
             // Handle the upload failure
+            Log.d(TAG, "uploadImage: " + exception)
+
+
+            try {
+                // Your Firebase Storage operation
+            } catch (e: StorageException) {
+                val errorCode = e.errorCode
+                // Log or handle the errorCode as needed
+
+                Log.d(TAG, "uploadImage: " + errorCode)
+                val innerException = e.cause
+                if (innerException != null) {
+
+                    Log.d(TAG, "uploadImage: " + innerException)
+                    // Log or handle the innerException as needed
+                }
+            }
+
             showToast(exception.localizedMessage?.toString() ?: exception.toString())
         }
     }
@@ -99,8 +121,43 @@ class UploadsActivity : AppCompatActivity() {
                 displayLoading(false)
                 showToast(it.toString())
             }
+    }
 
 
+    // Define a function for signing up or logging in
+    fun signUpOrLogin(email: String, password: String) {
+        displayLoading()
+        auth().createUserWithEmailAndPassword(email, password).addOnCompleteListener { signUpTask ->
+
+            if (signUpTask.isSuccessful) {
+                // User signed up successfully
+                displayLoading(false)
+
+            } else {
+                // User already signed up or sign-up failed
+                // Attempt to log in instead
+                auth().signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { loginTask ->
+                        if (loginTask.isSuccessful) {
+                            displayLoading(false)
+
+                            // User logged in successfully
+                            val user = auth().currentUser
+                            val userId = user?.uid
+                            if (userId != null) {
+                                //saveAdmin(userId)
+                            }
+                            // Proceed with your app flow
+                        } else {
+                            // Login failed
+                            val exception = loginTask.exception
+                            // Handle the failure case
+                            showToast(exception.toString())
+                            displayLoading(false)
+                        }
+                    }
+            }
+        }
     }
 
 }

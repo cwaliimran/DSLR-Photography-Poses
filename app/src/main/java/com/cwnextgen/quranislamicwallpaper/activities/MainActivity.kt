@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.cwnextgen.quranislamicwallpaper.activities.base.BaseActivity
 import com.cwnextgen.quranislamicwallpaper.adapters.HomeAdapter
 import com.cwnextgen.quranislamicwallpaper.databinding.ActivityMainBinding
 import com.cwnextgen.quranislamicwallpaper.models.MainModel
@@ -19,14 +20,13 @@ import com.cwnextgen.quranislamicwallpaper.utils.showToast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 
-class MainActivity : AppCompatActivity(), OnItemClick {
+class MainActivity : BaseActivity(), OnItemClick {
     private lateinit var binding: ActivityMainBinding
     private val TAG = MainActivity::class.java.simpleName
     private var mainModel = mutableListOf<MainModel>()
     lateinit var adapter: HomeAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         MobileAds.initialize(this) {}
@@ -34,6 +34,15 @@ class MainActivity : AppCompatActivity(), OnItemClick {
         binding.adView.loadAd(adRequest)
         askNotificationPermission()
         fetchData()
+    }
+
+    override fun clicks() {
+
+    }
+
+    override fun initAdapter() {
+        adapter = HomeAdapter(mainModel, this)
+        binding.recyclerView.adapter = adapter
     }
 
 
@@ -95,11 +104,10 @@ class MainActivity : AppCompatActivity(), OnItemClick {
             .addOnSuccessListener { querySnapshot ->
                 for (documentSnapshot in querySnapshot.documents) {
                     // Retrieve post data
-                    val modelPost = documentSnapshot.toObject(MainModel::class.java)
-                    documentSnapshot.toObject(MainModel::class.java)?.let { mainModel.add(it) }
+                    val model = documentSnapshot.toObject(MainModel::class.java)
+                    model?.let { mainModel.add(it) }
                 }
-                adapter = HomeAdapter(mainModel, this)
-                binding.recyclerView.adapter = adapter
+               adapter.updateData(mainModel)
                 displayLoading(false)
             }
             .addOnFailureListener { e ->

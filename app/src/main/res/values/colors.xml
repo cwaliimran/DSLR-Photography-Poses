@@ -5,4 +5,5 @@
     <color name="transparent">#00000000</color>
 
     <color name="primary">#4CAF50</color>
+    <color name="primaryDark">#317133</color>
 </resources>

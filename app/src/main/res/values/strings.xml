@@ -20,4 +20,5 @@
     <string name="label_gallery">Gallery</string>
     <string name="label_camera">Camera</string>
     <string name="label_cancel">Cancel</string>
+    <string name="set_lock_wallpaper">Set Lock Screen Wallpaper</string>
 </resources>

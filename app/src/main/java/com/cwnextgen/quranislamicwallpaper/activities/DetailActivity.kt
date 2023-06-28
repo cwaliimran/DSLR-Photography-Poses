@@ -5,8 +5,10 @@ import android.app.WallpaperManager
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.cwnextgen.quranislamicwallpaper.R
@@ -30,19 +32,22 @@ class DetailActivity : BaseActivity() {
     private lateinit var binding: ActivityDetailBinding
 
     private var mainModel = MainModel()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
+
 
     override fun onCreate() {
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        askWallpaperPermission()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
 
     override fun clicks() {
         binding.btnSetwallpaper.setOnClickListener {
-            askWallpaperPermission()
+            setWallpaper()
+        }
+        binding.btnSetwallpaperLock.setOnClickListener {
+            setLockScreenWallpaper()
         }
         binding.ivShare.setOnClickListener {
             getBitmapFromView(binding.cardView)
@@ -61,31 +66,71 @@ class DetailActivity : BaseActivity() {
         }
     }
 
-    private fun setWallpaperFromUrl() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val url = URL(mainModel.imageUrl)
-            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
-
-            val inputStream: InputStream = connection.inputStream
-            val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
-
-            val wallpaperManager = WallpaperManager.getInstance(this@DetailActivity)
-            try {
+    private fun setWallpaper() {
+        val bitmap = (binding.image.drawable as BitmapDrawable).bitmap
+        try {
+            val wallpaperManager = WallpaperManager.getInstance(this)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
+            } else {
                 wallpaperManager.setBitmap(bitmap)
-                // Alternatively, you can use wallpaperManager.setResource(R.drawable.my_wallpaper)
-                // if you want to set the wallpaper from a local drawable resource
-
-                // Show a success message or perform any other actions after setting the wallpaper
-            } catch (e: Exception) {
-                e.printStackTrace()
-                // Show an error message or handle the exception
-            } finally {
-                inputStream.close()
-                connection.disconnect()
             }
+            Toast.makeText(this, "Home screen wallpaper set successfully", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Failed to set home screen wallpaper", Toast.LENGTH_SHORT).show()
         }
+
+
+    }
+
+    private fun setLockScreenWallpaper() {
+        val bitmap = (binding.image.drawable as BitmapDrawable).bitmap
+        try {
+            val wallpaperManager = WallpaperManager.getInstance(this)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK)
+            } else {
+                Toast.makeText(
+                    this,
+                    "Lock screen wallpaper can only be set on Android N and above",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            Toast.makeText(this, "Lock screen wallpaper set successfully", Toast.LENGTH_SHORT)
+                .show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Failed to set lock screen wallpaper", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun setWallpaperFromUrl() {
+
+
+        /*   GlobalScope.launch(Dispatchers.IO) {
+               val url = URL(mainModel.imageUrl)
+               val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+               connection.doInput = true
+               connection.connect()
+
+               val inputStream: InputStream = connection.inputStream
+               val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
+
+               val wallpaperManager = WallpaperManager.getInstance(this@DetailActivity)
+               try {
+                   wallpaperManager.setBitmap(bitmap)
+                   // Alternatively, you can use wallpaperManager.setResource(R.drawable.my_wallpaper)
+                   // if you want to set the wallpaper from a local drawable resource
+
+                   // Show a success message or perform any other actions after setting the wallpaper
+               } catch (e: Exception) {
+                   e.printStackTrace()
+                   // Show an error message or handle the exception
+               } finally {
+                   inputStream.close()
+                   connection.disconnect()
+               }
+           }*/
     }
 
     private fun askWallpaperPermission() {

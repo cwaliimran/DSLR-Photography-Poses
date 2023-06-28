@@ -52,7 +52,17 @@
             android:id="@+id/btn_setwallpaper"
             style="@style/button"
             android:layout_margin="10dp"
+            android:layout_marginBottom="256dp"
             android:text="@string/set_wallpaper"
+            app:layout_constraintBottom_toTopOf="@+id/btn_setwallpaper_lock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_setwallpaper_lock"
+            style="@style/button"
+            android:layout_margin="10dp"
+            android:text="@string/set_lock_wallpaper"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
