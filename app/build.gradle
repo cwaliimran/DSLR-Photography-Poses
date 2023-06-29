@@ -25,11 +25,12 @@ android {
             keyAlias 'quranwallpaper'
             keyPassword 'qur@nw@llp@per'
             storePassword 'qur@nw@llp@per'
-            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/QuranWallpaper/key-quranwallpaper.jks")
+            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/QuranWallpaper/quran.jks")
         }
     }
     buildTypes {
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

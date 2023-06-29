@@ -15,7 +15,7 @@ class BindingUtils {
             Glide.with(view.context).load(imageUrl)
                 .transition(withCrossFade())
                 .placeholder(R.drawable.placeholder)
-                .error(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_foreground)
                 .into(view)
         }
     }

@@ -2,8 +2,8 @@
     <string name="app_name">Quran Wallpaper</string>
 
     <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_app_id">ca-app-pub-6434592293341843~5779733579</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6434592293341843/8020815733</string>
     <string name="dash">-</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>

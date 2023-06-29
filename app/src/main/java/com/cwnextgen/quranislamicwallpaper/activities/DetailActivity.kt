@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.TransitionDrawable
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -34,6 +35,7 @@ class DetailActivity : BaseActivity() {
     private lateinit var binding: ActivityDetailBinding
 
     private var mainModel = MainModel()
+    lateinit var bitmap: Bitmap
 
 
     override fun onCreate() {
@@ -72,7 +74,26 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun setWallpaper() {
-        val bitmap = (binding.image.drawable as BitmapDrawable).bitmap
+        val drawable = binding.imageView.drawable
+
+        if (drawable is BitmapDrawable) {
+            // Handle BitmapDrawable
+            val bitmapDrawable = drawable as BitmapDrawable
+            bitmap = bitmapDrawable.bitmap
+            // Use the bitmap or perform any necessary operations
+        } else if (drawable is TransitionDrawable) {
+            // Handle TransitionDrawable
+            val transitionDrawable = drawable as TransitionDrawable
+            val finalDrawable =
+                transitionDrawable.getDrawable(transitionDrawable.numberOfLayers - 1)
+            if (finalDrawable is BitmapDrawable) {
+                val bitmapDrawable = finalDrawable as BitmapDrawable
+                bitmap = bitmapDrawable.bitmap
+                // Use the bitmap or perform any necessary operations
+            }
+        } else {
+            // Handle other drawable types
+        }
         try {
             val wallpaperManager = WallpaperManager.getInstance(this)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -80,7 +101,8 @@ class DetailActivity : BaseActivity() {
             } else {
                 wallpaperManager.setBitmap(bitmap)
             }
-            Toast.makeText(this, "Home screen wallpaper set successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Home screen wallpaper set successfully", Toast.LENGTH_SHORT)
+                .show()
         } catch (e: Exception) {
             Toast.makeText(this, "Failed to set home screen wallpaper", Toast.LENGTH_SHORT).show()
         }
@@ -89,7 +111,29 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun setLockScreenWallpaper() {
-        val bitmap = (binding.image.drawable as BitmapDrawable).bitmap
+
+        val drawable = binding.imageView.drawable
+
+        if (drawable is BitmapDrawable) {
+            // Handle BitmapDrawable
+            val bitmapDrawable = drawable as BitmapDrawable
+            bitmap = bitmapDrawable.bitmap
+            // Use the bitmap or perform any necessary operations
+        } else if (drawable is TransitionDrawable) {
+            // Handle TransitionDrawable
+            val transitionDrawable = drawable as TransitionDrawable
+            val finalDrawable =
+                transitionDrawable.getDrawable(transitionDrawable.numberOfLayers - 1)
+            if (finalDrawable is BitmapDrawable) {
+                val bitmapDrawable = finalDrawable as BitmapDrawable
+                bitmap = bitmapDrawable.bitmap
+                // Use the bitmap or perform any necessary operations
+            }
+        } else {
+            // Handle other drawable types
+        }
+
+
         try {
             val wallpaperManager = WallpaperManager.getInstance(this)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -182,7 +226,6 @@ class DetailActivity : BaseActivity() {
             getString(R.string.cancel)
         )
     }
-
 
 
     // Called when leaving the activity
