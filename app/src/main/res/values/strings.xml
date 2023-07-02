@@ -21,4 +21,6 @@
     <string name="label_camera">Camera</string>
     <string name="label_cancel">Cancel</string>
     <string name="set_lock_wallpaper">Set Lock Screen Wallpaper</string>
+    <string name="add">Add</string>
+    <string name="upload_msg">You can uploaded your best selection of wallpapers to use them later and share with public.</string>
 </resources>

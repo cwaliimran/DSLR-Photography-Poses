@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,8 @@ import com.cwnextgen.quranislamicwallpaper.utils.getPicker
 import com.cwnextgen.quranislamicwallpaper.utils.showToast
 import com.cwnextgen.quranislamicwallpaper.utils.storage
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
@@ -33,8 +37,13 @@ class UploadsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding = ActivityUploadsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
 
         //  signUpOrLogin("quranwallpaper@admin.com", "quran6666wallpaper")
         binding.button1.setOnClickListener {
@@ -43,17 +52,22 @@ class UploadsActivity : AppCompatActivity() {
 //            }
 
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, 300)
+            uploadImageResultLauncher.launch(intent)
+
         }
+
+
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 300 && resultCode == Activity.RESULT_OK && data != null) {
-            val imageUri = data.data
-            uploadImageToFirebaseStorage(imageUri)
+
+    private val uploadImageResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val resultCode = result.resultCode
+            if (resultCode == Activity.RESULT_OK && result.data != null) {
+                val imageUri = result.data?.data
+                uploadImageToFirebaseStorage(imageUri)
+            }
         }
-    }
 
     private fun uploadImageToFirebaseStorage(imageUri: Uri?) {
 
@@ -64,24 +78,24 @@ class UploadsActivity : AppCompatActivity() {
             val imageRef = storageRef.child("wallpapers/${generateUUID()}+.jpg")
 
             imageRef.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
-                    displayLoading(false)
+                displayLoading(false)
 
-                    // Image upload successful
-                    val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
-                    imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                        val imageUrl = downloadUri.toString()
-                        Glide.with(this).load(imageUrl).into(binding.imageView)
-                        // Do something with the image URL, like saving it to a database
-                        val mainModel = MainModel(generateUUID(), imageUrl, "")
-                        saveData(mainModel)
-                    }
-                }.addOnFailureListener { exception ->
-                    displayLoading(false)
-                    // Handle the upload failure
-                    Log.d(TAG, "uploadImage: " + exception)
-
-
+                // Image upload successful
+                val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
+                imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    val imageUrl = downloadUri.toString()
+                    Glide.with(this).load(imageUrl).into(binding.imageView)
+                    // Do something with the image URL, like saving it to a database
+                    val mainModel = MainModel(generateUUID(), imageUrl, "")
+                    saveData(mainModel)
                 }
+            }.addOnFailureListener { exception ->
+                displayLoading(false)
+                // Handle the upload failure
+                Log.d(TAG, "uploadImage: " + exception)
+
+
+            }
 
                 .addOnFailureListener { exception ->
                     displayLoading(false)
@@ -92,68 +106,6 @@ class UploadsActivity : AppCompatActivity() {
         }
     }
 
-
-    private val startForProfileImageResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            val resultCode = result.resultCode
-            val data = result.data
-            if (resultCode == Activity.RESULT_OK) {
-                val uri = data?.data
-                val filePath = uri?.path
-
-                Log.d("TAGRESULT", "onActivityResult: $filePath")
-                filePath?.let { uploadImage(it) }
-            } else if (resultCode == ImagePicker.RESULT_ERROR) {
-                showToast(ImagePicker.getError(data))
-            }
-        }
-
-    private fun uploadImage(filePath: String) {
-        displayLoading()
-
-// Create a reference to the desired location in Firebase Storage
-        val imageRef: StorageReference =
-            storage().reference.child("wallpapers/${generateUUID()}.jpg")
-
-// Upload the image to Firebase Storage
-        val file = File(filePath)
-        val uploadTask = imageRef.putFile(Uri.fromFile(file))
-        uploadTask.addOnSuccessListener {
-
-            displayLoading(false)
-            // Image uploaded successfully
-            // Retrieve the download URL
-            imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                val imageUrl = downloadUri.toString()
-                Glide.with(this).load(imageUrl).into(binding.imageView)
-                // Do something with the image URL, like saving it to a database
-                val mainModel = MainModel(generateUUID(), imageUrl, "")
-                saveData(mainModel)
-            }
-        }.addOnFailureListener { exception ->
-            displayLoading(false)
-            // Handle the upload failure
-            Log.d(TAG, "uploadImage: " + exception)
-
-
-            try {
-                // Your Firebase Storage operation
-            } catch (e: StorageException) {
-                val errorCode = e.errorCode
-                // Log or handle the errorCode as needed
-
-                Log.d(TAG, "uploadImage: " + errorCode)
-                val innerException = e.cause
-                if (innerException != null) {
-
-                    Log.d(TAG, "uploadImage: " + innerException)
-                    // Log or handle the innerException as needed
-                }
-            }
-
-            showToast(exception.localizedMessage?.toString() ?: exception.toString())
-        }
-    }
 
     private fun saveData(mainModel: MainModel) {
         displayLoading()
@@ -208,6 +160,39 @@ class UploadsActivity : AppCompatActivity() {
                         }
                     }
             }
+        }
+    }
+
+
+    // Called when leaving the activity
+    public override fun onPause() {
+        binding.adView.pause()
+        super.onPause()
+    }
+
+    // Called when returning to the activity
+    public override fun onResume() {
+        super.onResume()
+        binding.adView.resume()
+    }
+
+    // Called before the activity is destroyed
+    public override fun onDestroy() {
+        binding.adView.destroy()
+        super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()  // Call onBackPressed() when the back button is pressed
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

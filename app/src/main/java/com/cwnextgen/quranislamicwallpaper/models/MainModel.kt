@@ -8,4 +8,5 @@ data class MainModel(
     var imageUrl: String? = "",
     var category: String? = "",
     var createdAt: Date? = Date(),
-) :Serializable
+    var active: Boolean? = true
+) : Serializable

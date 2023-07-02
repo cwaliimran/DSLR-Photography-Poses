@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.cwnextgen.quranislamicwallpaper.activities.base.BaseActivity
 import com.cwnextgen.quranislamicwallpaper.adapters.HomeAdapter
+import com.cwnextgen.quranislamicwallpaper.admin.UploadsActivity
 import com.cwnextgen.quranislamicwallpaper.databinding.ActivityMainBinding
 import com.cwnextgen.quranislamicwallpaper.models.MainModel
 import com.cwnextgen.quranislamicwallpaper.utils.AppConstants
@@ -37,7 +38,9 @@ class MainActivity : BaseActivity(), OnItemClick {
     }
 
     override fun clicks() {
-
+        binding.floatingActionButton.setOnClickListener {
+            startActivity(Intent(this, UploadsActivity::class.java))
+        }
     }
 
     override fun initAdapter() {
@@ -105,9 +108,11 @@ class MainActivity : BaseActivity(), OnItemClick {
                 for (documentSnapshot in querySnapshot.documents) {
                     // Retrieve post data
                     val model = documentSnapshot.toObject(MainModel::class.java)
-                    model?.let { mainModel.add(it) }
+                    if (model!!.active!!){
+                        mainModel.add(model)
+                    }
                 }
-               adapter.updateData(mainModel)
+                adapter.updateData(mainModel)
                 displayLoading(false)
             }
             .addOnFailureListener { e ->
