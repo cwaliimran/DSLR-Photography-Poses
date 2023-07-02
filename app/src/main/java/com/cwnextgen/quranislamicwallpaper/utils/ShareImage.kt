@@ -45,8 +45,9 @@ object ShareImage {
     fun send(context: Context) {
         val imagePath = File(context.cacheDir, "images")
         val newFile = File(imagePath, "image.png")
+
         val contentUri =
-            FileProvider.getUriForFile(context, "com.cwnextgen.quranislamicwallpaper.fileprovider", newFile)
+            FileProvider.getUriForFile(context, "${BuildConfig.APPLICATION_ID}.fileprovider", newFile)
 
         if (contentUri != null) {
             val shareIntent = Intent()

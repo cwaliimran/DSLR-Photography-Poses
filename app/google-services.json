@@ -36,38 +36,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:421281449183:android:b30cc6af75c848e525956a",
+        "mobilesdk_app_id": "1:421281449183:android:fed6b1c9abbbeca925956a",
         "android_client_info": {
-          "package_name": "com.cwnextgen.quranislamicwallpaper.admin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "421281449183-71kod1a1jv16ogh0m05090hncpo0sogd.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCm1__ZjrKvvWIh5FhBqduLQn9bmoRDku4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "421281449183-71kod1a1jv16ogh0m05090hncpo0sogd.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:421281449183:android:9188fe5620bcfcfb25956a",
-        "android_client_info": {
-          "package_name": "com.cwnextgen.quranislamicwallpaper.admin.admin"
+          "package_name": "com.cwnextgen.quranislamicwallpaper.dev"
         }
       },
       "oauth_client": [
