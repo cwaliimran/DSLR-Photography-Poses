@@ -31,7 +31,7 @@ class MainActivity : BaseActivity(), OnItemClick {
     override fun onCreate() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        MobileAds.initialize(this) {}
+        MobileAds.initialize(this@MainActivity)
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
         askNotificationPermission()
