@@ -1,17 +1,19 @@
 package com.cwnextgen.quranislamicwallpaper.admin
 
+
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.documentfile.provider.DocumentFile
 import com.bumptech.glide.Glide
+import com.cwnextgen.quranislamicwallpaper.BuildConfig
 import com.cwnextgen.quranislamicwallpaper.databinding.ActivityUploadsBinding
 import com.cwnextgen.quranislamicwallpaper.models.MainModel
 import com.cwnextgen.quranislamicwallpaper.utils.AppConstants
@@ -19,21 +21,18 @@ import com.cwnextgen.quranislamicwallpaper.utils.ProgressLoading.displayLoading
 import com.cwnextgen.quranislamicwallpaper.utils.auth
 import com.cwnextgen.quranislamicwallpaper.utils.firestore
 import com.cwnextgen.quranislamicwallpaper.utils.generateUUID
-import com.cwnextgen.quranislamicwallpaper.utils.getPicker
+import com.cwnextgen.quranislamicwallpaper.utils.isShow
 import com.cwnextgen.quranislamicwallpaper.utils.showToast
-import com.cwnextgen.quranislamicwallpaper.utils.storage
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageException
-import com.google.firebase.storage.StorageReference
-import java.io.File
-import java.util.Date
 
 class UploadsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadsBinding
     private val TAG = "UploadsActivityTAG"
+    var imageUris = mutableListOf<Uri>()
+
+    var totalFolderImages = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,25 +46,50 @@ class UploadsActivity : AppCompatActivity() {
 
         //  signUpOrLogin("quranwallpaper@admin.com", "quran6666wallpaper")
         binding.button1.setOnClickListener {
-//            getPicker().galleryOnly().createIntent { intent ->
-//                startForProfileImageResult.launch(intent)
-//            }
 
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            uploadImageResultLauncher.launch(intent)
+
+            if (BuildConfig.FLAVOR == "dev") {
+                binding.textViewUploadCount.isShow()
+                //select complete folder and then it fetches all images from folder and then we upload one by one
+                folderSelectionLauncher.launch(null)
+            } else { //users can upload single image at a time
+                val intent =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                uploadImageResultLauncher.launch(intent)
+            }
+
 
         }
 
 
     }
 
+    private val folderSelectionLauncher =
+        registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri: Uri? ->
+            // Handle the selected folder URI here
+            if (uri != null) {
+                val folderUri = uri
+                imageUris = getAllImageUrisFromFolder(folderUri)
+                totalFolderImages = imageUris.size
+                // Process the image URIs as needed
+//            for (imageUri in imageUris) {
+//                Log.d(TAG, "imageUri: $imageUri")
+//            }
+                if (imageUris.isNotEmpty()) {
+                    uploadImageToFirebaseStorage(imageUris.last())
+                } else {
+                    showToast("No images found")
+                }
+            }
+        }
 
     private val uploadImageResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val resultCode = result.resultCode
             if (resultCode == Activity.RESULT_OK && result.data != null) {
                 val imageUri = result.data?.data
-                uploadImageToFirebaseStorage(imageUri)
+                Log.d(TAG, "$imageUri: ")
+                  uploadImageToFirebaseStorage(imageUri)
             }
         }
 
@@ -94,6 +118,7 @@ class UploadsActivity : AppCompatActivity() {
                 // Handle the upload failure
                 Log.d(TAG, "uploadImage: " + exception)
 
+                checkAndUploadFolderImages()
 
             }
 
@@ -102,6 +127,7 @@ class UploadsActivity : AppCompatActivity() {
                     Log.d(TAG, "uploadImageToFirebaseStorage: " + exception.localizedMessage)
                     // Image upload failed
                     // Handle the error accordingly
+                    checkAndUploadFolderImages()
                 }
         }
     }
@@ -114,16 +140,35 @@ class UploadsActivity : AppCompatActivity() {
                 displayLoading(false)
                 if (it.isSuccessful) {
                     showToast("Uploaded successfully")
-//                    Glide.with(this).load(ContextCompat.getDrawable(this, R.drawable.placeholder))
-//                        .into(binding.imageView)
+                    checkAndUploadFolderImages()
 
                 } else {
                     showToast(it.exception.toString())
+                    checkAndUploadFolderImages()
                 }
             }.addOnFailureListener {
                 displayLoading(false)
                 showToast(it.toString())
+                checkAndUploadFolderImages()
             }
+    }
+
+    private fun checkAndUploadFolderImages() {
+        if (BuildConfig.FLAVOR == "dev") {
+            if (imageUris.isNotEmpty()) {
+                imageUris.removeLast()
+                if (imageUris.isNotEmpty()) {
+                    uploadImageToFirebaseStorage(imageUris.last())
+                }else {
+                    showToast("All images uploaded")
+                }
+            } else {
+                showToast("All images uploaded")
+            }
+            binding.textViewUploadCount.text = "total Images: $totalFolderImages \n" +
+                    "remaining uploads: ${imageUris.size}"
+        }
+
     }
 
 
@@ -186,14 +231,35 @@ class UploadsActivity : AppCompatActivity() {
         finish()
         super.onBackPressed()
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()  // Call onBackPressed() when the back button is pressed
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun getAllImageUrisFromFolder(folderUri: Uri): MutableList<Uri> {
+        val imageUris = mutableListOf<Uri>()
+
+        val folder = DocumentFile.fromTreeUri(this, folderUri)
+        folder?.listFiles()?.forEach { file ->
+            if (file.isFile && isImageFile(file.uri)) {
+                imageUris.add(file.uri)
+            }
+        }
+
+        return imageUris
+    }
+
+    private fun isImageFile(uri: Uri): Boolean {
+        val fileType = contentResolver.getType(uri)
+        return fileType?.startsWith("image/") ?: false
+    }
+
 
 }

@@ -59,6 +59,20 @@ class DetailActivity : BaseActivity() {
         binding.ivShare.setOnClickListener {
             getBitmapFromView(binding.cardView)
         }
+        binding.ivInfo.setOnClickListener {
+            genericDialog(
+                object : AlertDialogListener {
+                    override fun onYesClick(data: Any?) {
+                    }
+                },
+                getString(R.string.wallpaper),
+                getString(R.string.wallpaper_info_msg),
+                null,
+                cancelable = true,
+                hideNoBtn = true,
+            )
+
+        }
     }
 
     override fun apiAndArgs() {

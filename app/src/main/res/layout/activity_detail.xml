@@ -18,24 +18,6 @@
         android:layout_height="match_parent"
         tools:context=".activities.DetailActivity">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="70dp"
-                app:adSize="BANNER"
-                app:adUnitId="@string/banner_ad_unit_id" />
-        </LinearLayout>
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -45,7 +27,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_setwallpaper"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            app:layout_constraintTop_toBottomOf="@+id/adView">
 
 
             <ImageView
@@ -54,10 +36,21 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
                 android:loadImage="@{data.imageUrl}"
-                android:scaleType="centerInside"
+                android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
 
         </androidx.cardview.widget.CardView>
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="70dp"
+            app:adSize="BANNER"
+            app:adUnitId="@string/banner_ad_unit_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_setwallpaper"
@@ -89,6 +82,18 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_setwallpaper"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/baseline_share_24" />
+
+        <ImageView
+            android:id="@+id/ivInfo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/background_button"
+            android:elevation="10dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_setwallpaper"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/baseline_info_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

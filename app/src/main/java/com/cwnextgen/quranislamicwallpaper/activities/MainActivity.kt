@@ -20,6 +20,7 @@ import com.cwnextgen.quranislamicwallpaper.utils.firestore
 import com.cwnextgen.quranislamicwallpaper.utils.showToast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.firestore.Query
 
 class MainActivity : BaseActivity(), OnItemClick {
     private lateinit var binding: ActivityMainBinding
@@ -101,6 +102,7 @@ class MainActivity : BaseActivity(), OnItemClick {
         mainModel.clear()
         displayLoading()
         val postsCollection = firestore().collection(AppConstants.TBL_WALLPAPERS)
+        postsCollection.orderBy("createdAt", Query.Direction.DESCENDING)
 
 // Perform a query to retrieve the posts
         postsCollection.get()

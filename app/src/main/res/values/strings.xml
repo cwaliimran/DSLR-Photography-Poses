@@ -22,5 +22,7 @@
     <string name="label_cancel">Cancel</string>
     <string name="set_lock_wallpaper">Set Lock Screen Wallpaper</string>
     <string name="add">Add</string>
-    <string name="upload_msg">You can uploaded your best selection of wallpapers to use them later and share with public.</string>
+    <string name="upload_msg">You can upload your best selection of wallpapers to use them later and share with public.</string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="wallpaper_info_msg">Actual wallpaper (size) after setting on home/lock screen may differ from shown here. Please try different wallpapers to experience better.</string>
 </resources>
