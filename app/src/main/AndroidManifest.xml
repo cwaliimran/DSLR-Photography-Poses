@@ -21,16 +21,16 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".admin.UploadsActivity"
+            android:name="com.cwnextgen.hdwallpapers.admin.UploadsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DetailActivity"
+            android:name="com.cwnextgen.hdwallpapers.activities.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.cwnextgen.hdwallpapers.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.cwnextgen.hdwallpapers.activities.SplashActivity"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:theme="@style/SplashTheme">
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
 
-<!--        android:authorities="com.cwnextgen.quranislamicwallpaper.fileprovider"-->
+<!--        android:authorities="com.cwnextgen.hdwallpapers.fileprovider"-->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

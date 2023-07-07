@@ -7,25 +7,25 @@ plugins {
 }
 
 android {
-    namespace 'com.cwnextgen.quranislamicwallpaper'
+    namespace 'com.cwnextgen.hdwallpapers'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.cwnextgen.quranislamicwallpaper"
+        applicationId "com.cwnextgen.hdwallpapers"
         minSdk 23
         targetSdk 33
-        versionCode 4
-        versionName "1.4"
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         create("release") {
-            //organization quranwallpaper
-            keyAlias 'quranwallpaper'
-            keyPassword 'qur@nw@llp@per'
-            storePassword 'qur@nw@llp@per'
-            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/QuranWallpaper/quran.jks")
+            //organization hdwallpapers
+            keyAlias 'hdwallpapers'
+            keyPassword 'hdwallpapers'
+            storePassword 'hdwallpapers'
+            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/hdwallpapers/hdwallpapers.jks")
         }
     }
     buildTypes {

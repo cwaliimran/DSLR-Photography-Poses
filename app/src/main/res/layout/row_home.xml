@@ -7,9 +7,9 @@
 
         <variable
             name="data"
-            type="com.cwnextgen.quranislamicwallpaper.models.MainModel" />
+            type="com.cwnextgen.hdwallpapers.models.MainModel" />
 
-        <import type="com.cwnextgen.quranislamicwallpaper.utils.BindingUtils" />
+        <import type="com.cwnextgen.hdwallpapers.utils.BindingUtils" />
     </data>
 
     <androidx.cardview.widget.CardView

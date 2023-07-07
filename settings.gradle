@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "Quran Wallpaper"
+rootProject.name = "HD-and-3D-Wallpapers"
 include ':app'
