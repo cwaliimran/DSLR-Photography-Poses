@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import com.cwnextgen.hdwallpapers.BuildConfig
 import com.cwnextgen.hdwallpapers.R
+import com.cwnextgen.hdwallpapers.adapters.CategoriesAdapter
 import com.cwnextgen.hdwallpapers.admin.UploadsActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
                 finish()
             }else{
 
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, CategoriesActivity::class.java)
                 startActivity(intent)
                 finish()
             }

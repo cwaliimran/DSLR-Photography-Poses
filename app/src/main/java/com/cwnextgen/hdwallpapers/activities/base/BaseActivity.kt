@@ -23,6 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
 //            currentUser = AppClass.getCurrentUser()
 //        }
         onCreate()
+        initData()
         initAdapter()
         initObservers()
         clicks()
@@ -33,6 +34,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun onCreate()
     open fun initAdapter() {}
+    open fun initData() {}
     open fun initObservers() {}
     abstract fun clicks()
     open fun apiAndArgs() {}

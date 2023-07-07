@@ -7,4 +7,5 @@
     <color name="primary">#398D3C</color>
     <color name="secondary">#4CAF50</color>
     <color name="yellow">#F7C04A</color>
+    <color name="bg_cat_transparent">#48000000</color>
 </resources>
