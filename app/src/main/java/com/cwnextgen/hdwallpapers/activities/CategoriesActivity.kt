@@ -1,9 +1,7 @@
 package com.cwnextgen.hdwallpapers.activities
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
@@ -17,10 +15,9 @@ import com.cwnextgen.hdwallpapers.databinding.ActivityCategoriesBinding
 import com.cwnextgen.hdwallpapers.models.CategoriesModel
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
-import com.cwnextgen.hdwallpapers.utils.ShareImage.openPlayStoreForMoreApps
-import com.cwnextgen.hdwallpapers.utils.ShareImage.openPlayStoreForRating
-import com.cwnextgen.hdwallpapers.utils.ShareImage.shareApp
-import com.cwnextgen.hdwallpapers.utils.isShow
+import com.cwnextgen.hdwallpapers.utils.openPlayStoreForMoreApps
+import com.cwnextgen.hdwallpapers.utils.openPlayStoreForRating
+import com.cwnextgen.hdwallpapers.utils.shareApp
 import com.cwnextgen.hdwallpapers.utils.showToast
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -28,7 +25,6 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.appopen.AppOpenAd
-import java.util.Locale
 
 class CategoriesActivity : BaseActivity(), OnItemClick {
     private lateinit var binding: ActivityCategoriesBinding
@@ -52,7 +48,6 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
         if (BuildConfig.FLAVOR != "dev") {
             loadAppOpenAd()
         }
-
 
 
     }
@@ -254,9 +249,13 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
     }
 
     private fun showLanguageSelectionDialog() {
-        val languages = arrayOf(getString(R.string.english), getString(R.string.urdu), getString(R.string.hindi))
+        val languages = arrayOf(
+            getString(R.string.english),
+            getString(R.string.urdu),
+            getString(R.string.hindi)
+        )
         val languagesShort = arrayOf("en", "ur", "hi")
-         prevLang = AppClass.sharedPref.getString(AppConstants.APP_LANG, "en")
+        prevLang = AppClass.sharedPref.getString(AppConstants.APP_LANG, "en")
 
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setTitle("Choose Language")
@@ -276,6 +275,7 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
         val dialog = dialogBuilder.create()
         dialog.show()
     }
+
     private fun getSelectedLanguagePosition(): Int {
         return when (prevLang) {
             "en" -> 0

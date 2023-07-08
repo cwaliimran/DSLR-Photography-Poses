@@ -1,23 +1,12 @@
 package com.cwnextgen.hdwallpapers.activities
 
 import android.Manifest
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import androidx.core.view.MenuProvider
-import androidx.lifecycle.Lifecycle
 import com.cwnextgen.hdwallpapers.BuildConfig
 import com.cwnextgen.hdwallpapers.R
 import com.cwnextgen.hdwallpapers.activities.base.BaseActivity
@@ -29,9 +18,6 @@ import com.cwnextgen.hdwallpapers.models.WallpaperModel
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
 import com.cwnextgen.hdwallpapers.utils.ProgressLoading.displayLoading
-import com.cwnextgen.hdwallpapers.utils.ShareImage.openPlayStoreForMoreApps
-import com.cwnextgen.hdwallpapers.utils.ShareImage.openPlayStoreForRating
-import com.cwnextgen.hdwallpapers.utils.ShareImage.shareApp
 import com.cwnextgen.hdwallpapers.utils.firestore
 import com.cwnextgen.hdwallpapers.utils.isShow
 import com.cwnextgen.hdwallpapers.utils.showToast
@@ -42,7 +28,6 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import java.util.Locale
 
 class WallpapersActivity : BaseActivity(), OnItemClick {
     private lateinit var binding: ActivityWallpapersBinding

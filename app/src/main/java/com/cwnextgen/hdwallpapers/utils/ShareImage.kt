@@ -65,33 +65,4 @@ object ShareImage {
         }
     }
 
-    fun Context.shareApp() {
-
-            val shareIntent = Intent()
-            shareIntent.action = Intent.ACTION_SEND
-             shareIntent.type = "text/plain"
-            shareIntent.putExtra(
-                Intent.EXTRA_TEXT,
-                this.getString(R.string.share_text) + " ⬇️\n https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
-            )
-            this.startActivity(Intent.createChooser(shareIntent, "Share via"))
-        }
-
-    fun Context.openPlayStoreForRating() {
-        val packageName = packageName
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")))
-        } catch (e: ActivityNotFoundException) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")))
-        }
-    }
-
-    fun Context.openPlayStoreForMoreApps() {
-        val publisherName = "8909939532013135805"
-        try {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:$publisherName")))
-        } catch (e: ActivityNotFoundException) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=$publisherName")))
-        }
-    }
 }

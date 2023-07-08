@@ -112,6 +112,7 @@ class DetailActivity : BaseActivity() {
                 wallpaperModel = bundle!!.getSerializable(AppConstants.BUNDLE) as WallpaperModel
             }
             binding.data = wallpaperModel
+
         }
     }
 
