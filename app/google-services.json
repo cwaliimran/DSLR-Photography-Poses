@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1003311375323:android:2ce0eb38854e7cb0b87dfe",
+        "android_client_info": {
+          "package_name": "com.cwnextgen.hdwallpapers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003311375323-0o53h11jji048ght84mmmsko1mu45tv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBamwbovGPfqdUC8zsGpvvxk6KV6cxyzpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003311375323-0o53h11jji048ght84mmmsko1mu45tv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1003311375323:android:4487453059e335abb87dfe",
         "android_client_info": {
           "package_name": "com.cwnextgen.hdwallpapers.dev"

@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">HD-and-3D-Wallpapers</string>
+    <string name="app_name">NextGen Wallpapers</string>
 
     <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-    <string name="admob_app_id"></string>
-    <string name="banner_ad_unit_id"></string>
+    <string name="admob_app_id">ca-app-pub-6434592293341843~5848822238</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6434592293341843/7088330837</string>
+    <string name="openapp_ad_unit_id">ca-app-pub-6434592293341843/8178051227</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-6434592293341843/3925366473</string>
+    <string name="reward_ad_unit_id">ca-app-pub-6434592293341843/1299203139</string>
+    <string name="native_custom_ad_unit_id">ca-app-pub-6434592293341843/3716062033</string>
+
     <string name="dash">-</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -13,7 +18,7 @@
     <string name="open_settings">Open settings</string>
     <string name="cancel">Cancel</string>
     <string name="set_wallpaper">Set Home Screen Wallpaper</string>
-    <string name="share_text">"Download the best Quran Wallpaper app. "</string>
+    <string name="share_text">"Download the best NextGen Wallpapers app. "</string>
     <string name="upload">Upload</string>
 
     <string name="label_select_from">Select from</string>

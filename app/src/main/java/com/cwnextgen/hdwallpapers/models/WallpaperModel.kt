@@ -3,7 +3,7 @@ package com.cwnextgen.hdwallpapers.models
 import java.io.Serializable
 import java.util.Date
 
-data class MainModel(
+data class WallpaperModel(
     var id: String? = "",
     var imageUrl: String? = "",
     var category: String? = "",

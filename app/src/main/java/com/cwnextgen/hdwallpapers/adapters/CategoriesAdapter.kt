@@ -1,9 +1,11 @@
 package com.cwnextgen.hdwallpapers.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.cwnextgen.hdwallpapers.databinding.RowCategoriesBinding
 import com.cwnextgen.hdwallpapers.models.CategoriesModel
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
@@ -26,6 +28,36 @@ class CategoriesAdapter(
         val model = mList[position]
 
         holder.binding.data = model
+        model.image?.let { holder.binding.appCompatImageView.setImageResource(it) }
+
+
+   /*     //dynamic background
+
+// Define a list of dynamic colors.
+        val standardColors = listOf(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.CYAN,
+            Color.MAGENTA, Color.BLACK, Color.DKGRAY, Color.LTGRAY, Color.GRAY,
+            Color.WHITE)
+
+        val randomColors = List(30) { Color.rgb((0..255).random(), (0..255).random(), (0..255).random()) }
+
+        val dynamicColors = standardColors + randomColors
+
+// Select a random color from the list.
+        val dynamicColor = dynamicColors.random()
+
+// Extract RGB values.
+        val red = Color.red(dynamicColor)
+        val green = Color.green(dynamicColor)
+        val blue = Color.blue(dynamicColor)
+
+// Set alpha for transparency. 128 is approximately 50% transparent.
+        val color = Color.argb(70, red, green, blue)
+        val colorTv = Color.argb(255, red, green, blue)
+        holder.binding.title.setTextColor(colorTv)
+        holder.binding.title.setBackgroundColor(color)
+        holder.binding.title.setShadowLayer(1.6f,1f,1f,Color.WHITE);
+*/
+
     }
 
     override fun getItemCount(): Int {

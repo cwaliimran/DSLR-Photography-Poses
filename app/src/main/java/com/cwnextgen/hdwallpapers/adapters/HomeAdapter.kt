@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cwnextgen.hdwallpapers.databinding.RowHomeBinding
-import com.cwnextgen.hdwallpapers.models.MainModel
+import com.cwnextgen.hdwallpapers.models.WallpaperModel
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
 
 class HomeAdapter(
-    private var mList: MutableList<MainModel>,
+    private var mList: MutableList<WallpaperModel>,
     private var listener: OnItemClick
 ) : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
     lateinit var context: Context
@@ -31,7 +31,7 @@ class HomeAdapter(
         return mList.size
     }
 
-    fun updateData(modelPostsWithUsers: MutableList<MainModel>) {
+    fun updateData(modelPostsWithUsers: MutableList<WallpaperModel>) {
         this.mList = modelPostsWithUsers
         notifyDataSetChanged()
 

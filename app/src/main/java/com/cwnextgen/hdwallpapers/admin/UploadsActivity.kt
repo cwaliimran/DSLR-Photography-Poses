@@ -9,12 +9,13 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.documentfile.provider.DocumentFile
 import com.bumptech.glide.Glide
 import com.cwnextgen.hdwallpapers.BuildConfig
+import com.cwnextgen.hdwallpapers.activities.base.BaseActivity
 import com.cwnextgen.hdwallpapers.databinding.ActivityUploadsBinding
-import com.cwnextgen.hdwallpapers.models.MainModel
+import com.cwnextgen.hdwallpapers.models.CategoriesModel
+import com.cwnextgen.hdwallpapers.models.WallpaperModel
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.ProgressLoading.displayLoading
 import com.cwnextgen.hdwallpapers.utils.auth
@@ -26,10 +27,11 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.storage.FirebaseStorage
 
-class UploadsActivity : AppCompatActivity() {
+class UploadsActivity : BaseActivity() {
     private lateinit var binding: ActivityUploadsBinding
     private val TAG = "UploadsActivityTAG"
     var imageUris = mutableListOf<Uri>()
+    private var category = CategoriesModel()
 
     var totalFolderImages = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,6 @@ class UploadsActivity : AppCompatActivity() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
-        //  signUpOrLogin("hdwallpapers@admin.com", "quran6666wallpaper")
         binding.button1.setOnClickListener {
 
 
@@ -61,6 +62,23 @@ class UploadsActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onCreate() {
+
+    }
+
+    override fun clicks() {
+
+    }
+
+    override fun apiAndArgs() {
+        bundle = intent.extras
+        if (bundle != null) {
+            category = bundle!!.getSerializable(AppConstants.BUNDLE) as CategoriesModel
+            supportActionBar?.title = category.categoryTitle
+//            fetchData()
+        }
     }
 
     private val folderSelectionLauncher =
@@ -98,7 +116,7 @@ class UploadsActivity : AppCompatActivity() {
             displayLoading()
 
             val storageRef = FirebaseStorage.getInstance().reference
-            val imageRef = storageRef.child("wallpapers/${generateUUID()}+.jpg")
+            val imageRef = storageRef.child("appwallpapers/${generateUUID()}+.jpg")
 
             imageRef.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
                 displayLoading(false)
@@ -109,8 +127,8 @@ class UploadsActivity : AppCompatActivity() {
                     val imageUrl = downloadUri.toString()
                     Glide.with(this).load(imageUrl).into(binding.imageView)
                     // Do something with the image URL, like saving it to a database
-                    val mainModel = MainModel(generateUUID(), imageUrl, "")
-                    saveData(mainModel)
+                    val wallpaperModel = WallpaperModel(generateUUID(), imageUrl, "")
+                    saveData(wallpaperModel)
                 }
             }.addOnFailureListener { exception ->
                 displayLoading(false)
@@ -132,9 +150,9 @@ class UploadsActivity : AppCompatActivity() {
     }
 
 
-    private fun saveData(mainModel: MainModel) {
+    private fun saveData(wallpaperModel: WallpaperModel) {
         displayLoading()
-        firestore().collection(AppConstants.TBL_WALLPAPERS).document(mainModel.id!!).set(mainModel)
+        firestore().collection(category.id.toString()).document(wallpaperModel.id!!).set(wallpaperModel)
             .addOnCompleteListener {
                 displayLoading(false)
                 if (it.isSuccessful) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.WallpapersActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -49,6 +49,7 @@
         android:contentDescription="@string/add"
         android:focusable="true"
         android:src="@android:drawable/ic_input_add"
+        android:visibility="gone"
         app:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
