@@ -1,6 +1,15 @@
 package com.cwnextgen.hdwallpapers.activities
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.net.Uri
+import android.view.Menu
+import android.view.MenuItem
+import androidx.browser.customtabs.CustomTabsIntent
+import com.cwnextgen.hdwallpapers.AppClass
+import com.cwnextgen.hdwallpapers.BuildConfig
 import com.cwnextgen.hdwallpapers.R
 import com.cwnextgen.hdwallpapers.activities.base.BaseActivity
 import com.cwnextgen.hdwallpapers.adapters.CategoriesAdapter
@@ -8,12 +17,18 @@ import com.cwnextgen.hdwallpapers.databinding.ActivityCategoriesBinding
 import com.cwnextgen.hdwallpapers.models.CategoriesModel
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
+import com.cwnextgen.hdwallpapers.utils.ShareImage.openPlayStoreForMoreApps
+import com.cwnextgen.hdwallpapers.utils.ShareImage.openPlayStoreForRating
+import com.cwnextgen.hdwallpapers.utils.ShareImage.shareApp
+import com.cwnextgen.hdwallpapers.utils.isShow
+import com.cwnextgen.hdwallpapers.utils.showToast
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.appopen.AppOpenAd
+import java.util.Locale
 
 class CategoriesActivity : BaseActivity(), OnItemClick {
     private lateinit var binding: ActivityCategoriesBinding
@@ -21,6 +36,7 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
     private var mainModel = mutableListOf<CategoriesModel>()
     lateinit var adapter: CategoriesAdapter
     private var appOpenAd: AppOpenAd? = null
+    var prevLang = AppClass.sharedPref.getString(AppConstants.APP_LANG, "en")
 
     override fun onCreate() {
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
@@ -30,14 +46,25 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
         MobileAds.initialize(this) {}
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
-        loadAppOpenAd()
+
+
+        //only load app open add when app is live
+        if (BuildConfig.FLAVOR != "dev") {
+            loadAppOpenAd()
+        }
+
+
+
     }
 
     private fun loadAppOpenAd() {
         val adRequest = AdRequest.Builder().build()
 
         AppOpenAd.load(
-            this@CategoriesActivity, getString(R.string.openapp_ad_unit_id), adRequest, object : AppOpenAd.AppOpenAdLoadCallback() {
+            this@CategoriesActivity,
+            getString(R.string.openapp_ad_unit_id),
+            adRequest,
+            object : AppOpenAd.AppOpenAdLoadCallback() {
                 override fun onAdLoaded(ad: AppOpenAd) {
                     appOpenAd = ad
                     showAppOpenAd()
@@ -70,7 +97,7 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
     }
 
     override fun initData() {
-      //  mainModel.add(CategoriesModel(0, "Available Offline", R.drawable.three_d))
+        //  mainModel.add(CategoriesModel(0, "Available Offline", R.drawable.three_d))
         mainModel.add(CategoriesModel(1, "3D Wallpaper", R.drawable.three_d))
         mainModel.add(CategoriesModel(2, "Aerial and drone shorts", R.drawable.aerial))
         mainModel.add(CategoriesModel(3, "Animals Wallpaper", R.drawable.animals))
@@ -156,5 +183,105 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
     public override fun onDestroy() {
         binding.adView.destroy()
         super.onDestroy()
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Menu
+    ///////////////////////////////////////////////////////////////////////////
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.share -> {
+                this@CategoriesActivity.shareApp()
+                true
+            }
+
+            R.id.languages -> {
+                // Show the language selection dialog
+                showLanguageSelectionDialog()
+                true
+            }
+
+            R.id.menu_rate_app -> {
+
+                this@CategoriesActivity.openPlayStoreForRating()
+                true
+            }
+
+            R.id.menu_more_apps -> {
+                // Handle "More Apps" menu item click
+                this@CategoriesActivity.openPlayStoreForMoreApps()
+                return true
+            }
+
+            R.id.menu_contact_us -> {
+                // Handle "Contact Us" menu item click
+
+                try {
+                    val intent = Intent(Intent.ACTION_SENDTO)
+                    val subject = getString(R.string.app_name) + " Contact US"
+                    intent.data =
+                        Uri.parse("mailto:princelumia143@gmail.com?subject=$subject")
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    showToast("Contact us on support@daretheapp.com")
+                }
+
+                return true
+            }
+
+            R.id.menu_privacy_policy -> {
+                // Handle "Privacy Policy" menu item click
+                val url =
+                    "https://www.privacypolicies.com/live/50303bc2-88a3-4a5c-b54d-e9e02a1a4b2b"
+                val builder = CustomTabsIntent.Builder()
+                val customTabsIntent = builder.build()
+                customTabsIntent.launchUrl(this@CategoriesActivity, Uri.parse(url))
+
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    private fun showLanguageSelectionDialog() {
+        val languages = arrayOf(getString(R.string.english), getString(R.string.urdu), getString(R.string.hindi))
+        val languagesShort = arrayOf("en", "ur", "hi")
+         prevLang = AppClass.sharedPref.getString(AppConstants.APP_LANG, "en")
+
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("Choose Language")
+        dialogBuilder.setSingleChoiceItems(
+            languages,
+            getSelectedLanguagePosition()
+        ) { dialog, which ->
+            prevLang = languagesShort[which]
+        }
+        dialogBuilder.setPositiveButton("OK") { dialog, which ->
+            AppClass.sharedPref.storeString(AppConstants.APP_LANG, prevLang)
+            AppClass.changeLocale(this, prevLang); // Change the app language
+            recreate() // Refresh the activity to apply the language changes
+        }
+        dialogBuilder.setNegativeButton("Cancel", null)
+
+        val dialog = dialogBuilder.create()
+        dialog.show()
+    }
+    private fun getSelectedLanguagePosition(): Int {
+        return when (prevLang) {
+            "en" -> 0
+            "ur" -> 1
+            "hi" -> 2
+            else -> 0 // Default to English if the selected language is not recognized
+        }
     }
 }

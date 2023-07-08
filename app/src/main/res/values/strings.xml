@@ -1,19 +1,18 @@
 <resources>
-    <string name="app_name">NextGen Wallpapers</string>
+    <string name="app_name" translatable="false">NextGen Wallpapers</string>
 
-    <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
-    <string name="admob_app_id">ca-app-pub-6434592293341843~5848822238</string>
-    <string name="banner_ad_unit_id">ca-app-pub-6434592293341843/7088330837</string>
-    <string name="openapp_ad_unit_id">ca-app-pub-6434592293341843/8178051227</string>
-    <string name="interstitial_ad_unit_id">ca-app-pub-6434592293341843/3925366473</string>
-    <string name="reward_ad_unit_id">ca-app-pub-6434592293341843/1299203139</string>
-    <string name="native_custom_ad_unit_id">ca-app-pub-6434592293341843/3716062033</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-6434592293341843~5848822238</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/7088330837</string>
+    <string name="openapp_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/8178051227</string>
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/3925366473</string>
+    <string name="reward_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/1299203139</string>
+    <string name="native_custom_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/3716062033</string>
 
-    <string name="dash">-</string>
+    <string name="dash" translatable="false">-</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="done">Done</string>
-    <string name="permissions">Permission Needed</string>
+    <string name="permissions">Permission Needed</string>N
     <string name="permission_needed">Please grant permission</string>
     <string name="open_settings">Open settings</string>
     <string name="cancel">Cancel</string>
@@ -30,4 +29,14 @@
     <string name="upload_msg">You can upload your best selection of wallpapers to use them later and share with public.</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="wallpaper_info_msg">Actual wallpaper (size) after setting on home/lock screen may differ from shown here. Please try different wallpapers to experience better.</string>
+    <string name="share">Share</string>
+    <string name="languages">Languages</string>
+    <string name="more">More</string>
+    <string name="rate_app">Rate App</string>
+    <string name="more_apps">More Apps</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="english">English</string>
+    <string name="urdu">اردو</string>
+    <string name="hindi">हिंदी</string>
 </resources>

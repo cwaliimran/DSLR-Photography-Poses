@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.cwnextgen.hdwallpapers.AppClass
+import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.google.gson.Gson
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -13,15 +15,10 @@ abstract class BaseActivity : AppCompatActivity() {
     val gson = Gson()
     lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
+        val appLang = AppClass.sharedPref.getString(AppConstants.APP_LANG, "en")
+        AppClass.changeLocale(this, appLang);
         super.onCreate(savedInstanceState)
-        // GlobalClass.updateStatusBar(window)
         context = this
-//        if (AppClass.getCurrentUser() == null){
-//            Toast.makeText(this, "Please login", Toast.LENGTH_LONG).show()
-//            // TODO: start activity login
-//        }else{
-//            currentUser = AppClass.getCurrentUser()
-//        }
         onCreate()
         initData()
         initAdapter()
@@ -82,4 +79,5 @@ abstract class BaseActivity : AppCompatActivity() {
 //            currentUser = AppClass.getCurrentUser()
 //        }
     }
+
 }

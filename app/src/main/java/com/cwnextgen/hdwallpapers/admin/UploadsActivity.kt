@@ -119,8 +119,6 @@ class UploadsActivity : BaseActivity() {
             val imageRef = storageRef.child("appwallpapers/${generateUUID()}+.jpg")
 
             imageRef.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
-                displayLoading(false)
-
                 // Image upload successful
                 val downloadUrl = taskSnapshot.metadata?.reference?.downloadUrl
                 imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
@@ -151,7 +149,6 @@ class UploadsActivity : BaseActivity() {
 
 
     private fun saveData(wallpaperModel: WallpaperModel) {
-        displayLoading()
         firestore().collection(category.id.toString()).document(wallpaperModel.id!!).set(wallpaperModel)
             .addOnCompleteListener {
                 displayLoading(false)
