@@ -6,13 +6,11 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import androidx.browser.customtabs.CustomTabsIntent
-import com.cwnextgen.hdwallpapers.AppClass
 import com.cwnextgen.hdwallpapers.BuildConfig
 import com.cwnextgen.hdwallpapers.R
 import com.cwnextgen.hdwallpapers.activities.base.BaseActivity
 import com.cwnextgen.hdwallpapers.adapters.CategoriesAdapter
 import com.cwnextgen.hdwallpapers.databinding.ActivityCategoriesBinding
-import com.cwnextgen.hdwallpapers.models.CategoriesModel
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
 import com.cwnextgen.hdwallpapers.utils.openPlayStoreForMoreApps
@@ -25,6 +23,8 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.appopen.AppOpenAd
+import com.network.AppClass
+import com.network.models.CategoriesModel
 
 class CategoriesActivity : BaseActivity(), OnItemClick {
     private lateinit var binding: ActivityCategoriesBinding

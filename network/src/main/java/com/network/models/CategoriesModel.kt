@@ -1,4 +1,4 @@
-package com.cwnextgen.hdwallpapers.models
+package com.network.models
 
 import java.io.Serializable
 

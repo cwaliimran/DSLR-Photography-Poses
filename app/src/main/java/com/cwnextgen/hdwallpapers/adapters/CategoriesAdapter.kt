@@ -1,13 +1,11 @@
 package com.cwnextgen.hdwallpapers.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.cwnextgen.hdwallpapers.databinding.RowCategoriesBinding
-import com.cwnextgen.hdwallpapers.models.CategoriesModel
+import com.network.models.CategoriesModel
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
 
 class CategoriesAdapter(

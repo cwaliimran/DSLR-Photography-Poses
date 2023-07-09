@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cwnextgen.hdwallpapers.databinding.RowHomeBinding
-import com.cwnextgen.hdwallpapers.models.WallpaperModel
+import com.network.models.WallpaperModel
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
 
-class HomeAdapter(
+class WallpapersAdapter(
     private var mList: MutableList<WallpaperModel>,
     private var listener: OnItemClick
-) : RecyclerView.Adapter<HomeAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<WallpapersAdapter.MyViewHolder>() {
     lateinit var context: Context
 
 

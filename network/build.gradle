@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    def configs = rootProject.ext
+    namespace 'com.network'
+    compileSdk configs.compileSdkVersion
+
+
+    defaultConfig {
+        minSdk configs.minSdkVersion
+        targetSdk configs.targetSdkVersion
+
+        testInstrumentationRunner configs.testInstrumentationRunner
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //view model // lifecycle
+    api("androidx.core:core-ktx:1.10.1")
+    api("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    api("androidx.collection:collection-ktx:1.2.0")
+    def lifeCycle = "2.6.1"
+    api("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycle")
+    api("androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycle")
+    api("androidx.lifecycle:lifecycle-runtime:$lifeCycle")
+    api("androidx.lifecycle:lifecycle-runtime-ktx:$lifeCycle")
+    api "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifeCycle"
+
+    //coroutines
+    def coroutinesCore = "1.6.4"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCore")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesCore")
+
+    //room database components
+    def roomVersion = "2.6.0-alpha01"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+
+    //gson
+    api 'com.google.code.gson:gson:2.10.1'
+
+}

@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide
 import com.cwnextgen.hdwallpapers.BuildConfig
 import com.cwnextgen.hdwallpapers.activities.base.BaseActivity
 import com.cwnextgen.hdwallpapers.databinding.ActivityUploadsBinding
-import com.cwnextgen.hdwallpapers.models.CategoriesModel
-import com.cwnextgen.hdwallpapers.models.WallpaperModel
+import com.network.models.CategoriesModel
+import com.network.models.WallpaperModel
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.ProgressLoading.displayLoading
 import com.cwnextgen.hdwallpapers.utils.auth
@@ -125,7 +125,7 @@ class UploadsActivity : BaseActivity() {
                     val imageUrl = downloadUri.toString()
                     Glide.with(this).load(imageUrl).into(binding.imageView)
                     // Do something with the image URL, like saving it to a database
-                    val wallpaperModel = WallpaperModel(generateUUID(), imageUrl, "")
+                    val wallpaperModel = WallpaperModel(generateUUID(), imageUrl, category.id.toString())
                     saveData(wallpaperModel)
                 }
             }.addOnFailureListener { exception ->
@@ -149,7 +149,7 @@ class UploadsActivity : BaseActivity() {
 
 
     private fun saveData(wallpaperModel: WallpaperModel) {
-        firestore().collection(category.id.toString()).document(wallpaperModel.id!!).set(wallpaperModel)
+        firestore().collection(category.id.toString()).document(wallpaperModel.id).set(wallpaperModel)
             .addOnCompleteListener {
                 displayLoading(false)
                 if (it.isSuccessful) {

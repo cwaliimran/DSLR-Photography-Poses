@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat
 import com.cwnextgen.hdwallpapers.R
 import com.cwnextgen.hdwallpapers.activities.base.BaseActivity
 import com.cwnextgen.hdwallpapers.databinding.ActivityDetailBinding
-import com.cwnextgen.hdwallpapers.models.WallpaperModel
+import com.network.models.WallpaperModel
 import com.cwnextgen.hdwallpapers.utils.AlertDialogListener
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.ShareImage.getBitmapFromView

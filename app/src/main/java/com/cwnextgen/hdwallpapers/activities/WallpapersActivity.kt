@@ -6,15 +6,15 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.cwnextgen.hdwallpapers.BuildConfig
 import com.cwnextgen.hdwallpapers.R
 import com.cwnextgen.hdwallpapers.activities.base.BaseActivity
-import com.cwnextgen.hdwallpapers.adapters.HomeAdapter
+import com.cwnextgen.hdwallpapers.adapters.WallpapersAdapter
 import com.cwnextgen.hdwallpapers.admin.UploadsActivity
 import com.cwnextgen.hdwallpapers.databinding.ActivityWallpapersBinding
-import com.cwnextgen.hdwallpapers.models.CategoriesModel
-import com.cwnextgen.hdwallpapers.models.WallpaperModel
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.cwnextgen.hdwallpapers.utils.OnItemClick
 import com.cwnextgen.hdwallpapers.utils.ProgressLoading.displayLoading
@@ -28,17 +28,23 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.network.models.CategoriesModel
+import com.network.models.WallpaperModel
+import com.network.roomdb.WallpapersViewModel
+import kotlinx.coroutines.launch
 
 class WallpapersActivity : BaseActivity(), OnItemClick {
     private lateinit var binding: ActivityWallpapersBinding
     private val TAG = WallpapersActivity::class.java.simpleName
+    lateinit var adapter: WallpapersAdapter
     private var wallpaperModel = mutableListOf<WallpaperModel>()
     private var category = CategoriesModel()
-    lateinit var adapter: HomeAdapter
     private var mInterstitialAd: InterstitialAd? = null
     lateinit var adRequest: AdRequest
     lateinit var adRequest1: AdRequest
 
+    private val viewModelRoom: WallpapersViewModel by viewModels()
+    private var isFetchedOnline = false
     override fun onCreate() {
 
         binding = ActivityWallpapersBinding.inflate(layoutInflater)
@@ -51,7 +57,6 @@ class WallpapersActivity : BaseActivity(), OnItemClick {
         askNotificationPermission()
 
         loadAdRequest()
-
 
     }
 
@@ -91,7 +96,7 @@ class WallpapersActivity : BaseActivity(), OnItemClick {
     }
 
     override fun initAdapter() {
-        adapter = HomeAdapter(wallpaperModel, this)
+        adapter = WallpapersAdapter(wallpaperModel, this)
         binding.recyclerView.adapter = adapter
     }
 
@@ -153,7 +158,38 @@ class WallpapersActivity : BaseActivity(), OnItemClick {
 
     private fun fetchData() {
         wallpaperModel.clear()
+
         displayLoading()
+        //get data from room database if available against current category
+        lifecycleScope.launch {
+            viewModelRoom.getWallpapersByCategory(category.id.toString())
+                .observe(this@WallpapersActivity) {
+                    if (it != null) {
+                        if (!isFetchedOnline) {
+                            wallpaperModel.addAll(it as MutableList<WallpaperModel>)
+                            Log.d(
+                                TAG,
+                                "fetchData: local found and completed ${wallpaperModel.size}"
+                            )
+                            if (wallpaperModel.isNotEmpty()) {
+                                adapter.updateData(wallpaperModel)
+                                displayLoading(false)
+                            } else {
+                                fetchDataFromServer()
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "fetchData: local not found")
+//                        fetchDataFromServer()
+                    }
+                }
+        }
+
+    }
+
+    private fun fetchDataFromServer() {
+        Log.d(TAG, "fetchData: live")
+
         val postsCollection = firestore().collection(category.id.toString())
 
 // Perform a query to retrieve the posts
@@ -165,14 +201,15 @@ class WallpapersActivity : BaseActivity(), OnItemClick {
                     wallpaperModel.add(model)
                 }
             }
+            isFetchedOnline = true
             adapter.updateData(wallpaperModel)
+            viewModelRoom.insertWallpapers(wallpaperModel)
             displayLoading(false)
         }.addOnFailureListener { e ->
             displayLoading(false)
             // Handle any errors that occurred while querying the posts collection
             e.localizedMessage?.let { showToast(it) }
         }
-
     }
 
     override fun onClick(position: Int, type: String?, data: Any?) {

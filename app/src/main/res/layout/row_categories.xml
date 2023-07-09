@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.cwnextgen.hdwallpapers.models.CategoriesModel" />
+            type="com.network.models.CategoriesModel" />
 
     </data>
 

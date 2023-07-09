@@ -7,17 +7,27 @@ plugins {
 }
 
 android {
-    namespace 'com.cwnextgen.hdwallpapers'
-    compileSdk 33
+    def configs = rootProject.ext
+
+    namespace configs.applicationId
+    compileSdk configs.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.cwnextgen.hdwallpapers"
-        minSdk 23
-        targetSdk 33
-        versionCode 2
-        versionName "1.1"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId configs.applicationId
+        minSdk configs.minSdkVersion
+        targetSdk configs.targetSdkVersion
+        versionCode configs.versionCode
+        versionName configs.versionName
+        testInstrumentationRunner configs.testInstrumentationRunner
+        multiDexEnabled true
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+        sourceSets {
+            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        }
     }
     signingConfigs {
         create("release") {
@@ -63,6 +73,7 @@ android {
 
 dependencies {
 
+    implementation project(path: ':network')
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
@@ -71,6 +82,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    //android x
+    implementation("androidx.activity:activity-ktx:1.7.2")
+    implementation("androidx.fragment:fragment-ktx:1.6.0")
 
     implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
     implementation 'com.google.firebase:firebase-auth:22.0.0'
@@ -90,7 +104,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
 
 
-    implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
     implementation 'androidx.browser:browser:1.5.0'

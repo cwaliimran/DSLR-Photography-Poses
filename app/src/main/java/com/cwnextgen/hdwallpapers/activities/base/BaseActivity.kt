@@ -4,9 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.cwnextgen.hdwallpapers.AppClass
 import com.cwnextgen.hdwallpapers.utils.AppConstants
 import com.google.gson.Gson
+import com.network.AppClass
 
 abstract class BaseActivity : AppCompatActivity() {
 

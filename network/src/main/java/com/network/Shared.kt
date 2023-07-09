@@ -1,8 +1,7 @@
-package com.cwnextgen.hdwallpapers.utils
+package com.network
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.cwnextgen.hdwallpapers.AppClass
 import com.google.gson.Gson
 
 class SharedPref(myApp: AppClass) {
