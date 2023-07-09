@@ -35,7 +35,7 @@ android {
             keyAlias 'dslrphotographyposes'
             keyPassword 'dslrphotographyposes'
             storePassword 'dslrphotographyposes'
-            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/dslrphotographyposes/dslrphotographyposes.jks")
+            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/DSLR photography poses/dslrphotographyposes.jks")
         }
     }
     buildTypes {

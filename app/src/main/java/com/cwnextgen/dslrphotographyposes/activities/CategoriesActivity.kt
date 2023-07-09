@@ -192,7 +192,7 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
             R.id.menu_privacy_policy -> {
                 // Handle "Privacy Policy" menu item click
                 val url =
-                    "https://www.privacypolicies.com/live/50303bc2-88a3-4a5c-b54d-e9e02a1a4b2b"
+                    "https://www.privacypolicies.com/live/dae1a231-843f-4097-b482-0281b4070d64"
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
                 customTabsIntent.launchUrl(this@CategoriesActivity, Uri.parse(url))
