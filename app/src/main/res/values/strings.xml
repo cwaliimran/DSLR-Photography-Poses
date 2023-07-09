@@ -40,4 +40,5 @@
     <string name="urdu">اردو</string>
     <string name="hindi">हिंदी</string>
     <string name="no_data_found">No data found</string>
+    <string name="default_notification_channel_id" translatable="false">Default</string>
 </resources>
