@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1003311375323",
-    "project_id": "hd-and-3d-wallpapers",
-    "storage_bucket": "hd-and-3d-wallpapers.appspot.com"
+    "project_number": "214827964512",
+    "project_id": "dslr-photography-poses",
+    "storage_bucket": "dslr-photography-poses.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1003311375323:android:2ce0eb38854e7cb0b87dfe",
+        "mobilesdk_app_id": "1:214827964512:android:53517209022d359f240b05",
         "android_client_info": {
-          "package_name": "com.cwnextgen.hdwallpapers"
+          "package_name": "com.cwnextgen.dslrphotographyposes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1003311375323-0o53h11jji048ght84mmmsko1mu45tv3.apps.googleusercontent.com",
+          "client_id": "214827964512-t7o4jmg11p026bar2d993ji2kvcqcfoa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBamwbovGPfqdUC8zsGpvvxk6KV6cxyzpA"
+          "current_key": "AIzaSyDNdA7eGWn_hYuTTjg1plcNIrf2riI_3Z4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1003311375323-0o53h11jji048ght84mmmsko1mu45tv3.apps.googleusercontent.com",
+              "client_id": "214827964512-t7o4jmg11p026bar2d993ji2kvcqcfoa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -36,27 +36,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1003311375323:android:4487453059e335abb87dfe",
+        "mobilesdk_app_id": "1:214827964512:android:2d4b68a220b0fd39240b05",
         "android_client_info": {
-          "package_name": "com.cwnextgen.hdwallpapers.dev"
+          "package_name": "com.cwnextgen.dslrphotographyposes.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1003311375323-0o53h11jji048ght84mmmsko1mu45tv3.apps.googleusercontent.com",
+          "client_id": "214827964512-t7o4jmg11p026bar2d993ji2kvcqcfoa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBamwbovGPfqdUC8zsGpvvxk6KV6cxyzpA"
+          "current_key": "AIzaSyDNdA7eGWn_hYuTTjg1plcNIrf2riI_3Z4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1003311375323-0o53h11jji048ght84mmmsko1mu45tv3.apps.googleusercontent.com",
+              "client_id": "214827964512-t7o4jmg11p026bar2d993ji2kvcqcfoa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,5 +1,5 @@
 ext {
-  applicationId = "com.cwnextgen.hdwallpapers"
+  applicationId = "com.cwnextgen.dslrphotographyposes"
   compileSdkVersion = 33
   minSdkVersion = 26
   targetSdkVersion = compileSdkVersion

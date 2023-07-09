@@ -6,7 +6,7 @@ import com.google.gson.Gson
 
 class SharedPref(myApp: AppClass) {
 
-    val PREFS_NAME = "HD_WALLPAPERS_PREFS"
+    val PREFS_NAME = "DSLR_PHOTOGRAPHY_PREFS"
     private var sharedPref: SharedPreferences? = null
     private var editor: SharedPreferences.Editor? = null
     private var value: String? = null

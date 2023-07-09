@@ -2,49 +2,49 @@ package com.network.roomdb
 
 import androidx.lifecycle.LiveData
 import com.network.AppClass
+import com.network.models.ImagesModel
 import com.network.models.InAppPurchase
-import com.network.models.WallpaperModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class RoomMainRepo {
 
     ///////////////////////////////////////////////////////////////////////////
-    // WALLPAPERS
+    // Images
     ///////////////////////////////////////////////////////////////////////////
-    val daoWallpapers = AppDatabase.getDatabase(AppClass.instance).questionsDao()
+    val daoImages = AppDatabase.getDatabase(AppClass.instance).imagesDao()
 
-    val getWallpapers: LiveData<List<WallpaperModel>> = daoWallpapers.getAllWallpapers()
+    val getImages: LiveData<List<ImagesModel>> = daoImages.getAllImages()
 
-    fun getWallpapersByCategory(
+    fun getImagesByCategory(
         category: String,
-    ): LiveData<List<WallpaperModel>> {
-        return daoWallpapers.getWallpapersByCategory(category)
+    ): LiveData<List<ImagesModel>> {
+        return daoImages.getImagesByCategory(category)
     }
 
-    suspend fun addWallpaper(question: WallpaperModel) {
-        daoWallpapers.addWallpaper(question)
+    suspend fun addImage(image: ImagesModel) {
+        daoImages.addImage(image)
     }
 
-    suspend fun insertWallpapers(question: List<WallpaperModel>) {
-        daoWallpapers.insertWallpapers(question)
+    suspend fun insertImages(image: List<ImagesModel>) {
+        daoImages.insertImages(image)
     }
 
-    suspend fun updateWallpaper(question: WallpaperModel) {
+    suspend fun updateImage(image: ImagesModel) {
         withContext(Dispatchers.IO) {
-            daoWallpapers.updateWallpaper(question)
+            daoImages.updateImage(image)
         }
     }
 
-    suspend fun deleteWallpaper(question: WallpaperModel) {
-        daoWallpapers.deleteWallpaper(question)
+    suspend fun deleteImage(image: ImagesModel) {
+        daoImages.deleteImage(image)
     }
 
-    suspend fun deleteAllWallpapers() {
-        daoWallpapers.deleteAllWallpapers()
+    suspend fun deleteAllImages() {
+        daoImages.deleteAllImages()
     }
 
-    val isDbEmpty: LiveData<Boolean> = daoWallpapers.isDbEmpty()
+    val isDbEmpty: LiveData<Boolean> = daoImages.isDbEmpty()
 
 
     ///////////////////////////////////////////////////////////////////////////

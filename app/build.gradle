@@ -31,11 +31,11 @@ android {
     }
     signingConfigs {
         create("release") {
-            //organization hdwallpapers
-            keyAlias 'hdwallpapers'
-            keyPassword 'hdwallpapers'
-            storePassword 'hdwallpapers'
-            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/hdwallpapers/hdwallpapers.jks")
+            //organization dslrphotographyposes
+            keyAlias 'dslrphotographyposes'
+            keyPassword 'dslrphotographyposes'
+            storePassword 'dslrphotographyposes'
+            storeFile file("/Users/s/Desktop/Development/AndroidApps/Android-Apps-JKS-Files/dslrphotographyposes/dslrphotographyposes.jks")
         }
     }
     buildTypes {
@@ -58,14 +58,14 @@ android {
         dataBinding = true
         buildConfig true
     }
-    flavorDimensions 'wallpaper'
+    flavorDimensions 'photography'
     productFlavors {
         dev {
-            dimension 'wallpaper'
+            dimension 'photography'
             applicationIdSuffix '.dev'
         }
         prod {
-            dimension 'wallpaper'
+            dimension 'photography'
         }
     }
 

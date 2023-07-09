@@ -5,12 +5,12 @@ import androidx.room.*
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.network.models.InAppPurchase
-import com.network.models.WallpaperModel
+import com.network.models.ImagesModel
 import com.network.roomdb.dao.DaoInAppPurchases
-import com.network.roomdb.dao.DaoWallpapers
+import com.network.roomdb.dao.DaoImages
 
 @Database(
-    entities = [WallpaperModel::class, InAppPurchase::class],
+    entities = [ImagesModel::class, InAppPurchase::class],
     version = 1,
     exportSchema = true,
      autoMigrations = [
@@ -22,8 +22,7 @@ import com.network.roomdb.dao.DaoWallpapers
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun questionsDao(): DaoWallpapers
-//    abstract fun creatorQuestionsDao(): DaoCreatorModeQuestions
+    abstract fun imagesDao(): DaoImages
     abstract fun purchasesDao(): DaoInAppPurchases
 
     companion object {
@@ -31,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
        //for custom migrations
       val migration_1_2 = object : Migration(1, 2) {
       override fun migrate(database: SupportSQLiteDatabase) {
-          database.execSQL("ALTER TABLE wallpapers ADD COLUMN category_type TEXT")
+          database.execSQL("ALTER TABLE images ADD COLUMN category_type TEXT")
       }
   }
 

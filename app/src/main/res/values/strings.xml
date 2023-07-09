@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name" translatable="false">NextGen Wallpapers</string>
+    <string name="app_name" translatable="false">DSLR Photography  Poses</string>
 
-    <string name="admob_app_id" translatable="false">ca-app-pub-6434592293341843~5848822238</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/7088330837</string>
-    <string name="openapp_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/8178051227</string>
-    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/3925366473</string>
-    <string name="reward_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/1299203139</string>
-    <string name="native_custom_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/3716062033</string>
+<!--    <string name="admob_app_id" translatable="false">ca-app-pub-6434592293341843~5848822238</string>-->
+<!--    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/7088330837</string>-->
+<!--    <string name="openapp_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/8178051227</string>-->
+<!--    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/3925366473</string>-->
+<!--    <string name="reward_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/1299203139</string>-->
+<!--    <string name="native_custom_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/3716062033</string>-->
 
     <string name="dash" translatable="false">-</string>
     <string name="yes">Yes</string>
@@ -16,19 +16,15 @@
     <string name="permission_needed">Please grant permission</string>
     <string name="open_settings">Open settings</string>
     <string name="cancel">Cancel</string>
-    <string name="set_wallpaper">Set Home Screen Wallpaper</string>
-    <string name="share_text">"Download the best NextGen Wallpapers app. "</string>
+    <string name="share_text" translatable="false">"Download the best app."</string>
     <string name="upload">Upload</string>
 
     <string name="label_select_from">Select from</string>
     <string name="label_gallery">Gallery</string>
     <string name="label_camera">Camera</string>
     <string name="label_cancel">Cancel</string>
-    <string name="set_lock_wallpaper">Set Lock Screen Wallpaper</string>
     <string name="add">Add</string>
-    <string name="upload_msg">You can upload your best selection of wallpapers to use them later and share with public.</string>
-    <string name="wallpaper">Wallpaper</string>
-    <string name="wallpaper_info_msg">Actual wallpaper (size) after setting on home/lock screen may differ from shown here. Please try different wallpapers to experience better.</string>
+    <string name="upload_msg">You can upload your best selection to use them later and share with public.</string>
     <string name="share">Share</string>
     <string name="languages">Languages</string>
     <string name="more">More</string>

@@ -13,6 +13,6 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "HD-and-3D-Wallpapers"
+rootProject.name = "DSLR Photography  Poses"
 include ':app'
 include ':network'

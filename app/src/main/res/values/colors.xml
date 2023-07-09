@@ -5,8 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
 
-    <color name="primary">#51DED0</color>
-    <color name="secondary">#22A699</color>
-    <color name="yellow">#F7C04A</color>
-    <color name="bg_cat_transparent">#77000000</color>
+    <color name="primary">#F99B7D</color>
+    <color name="secondary">#F68967</color>
+    <color name="bg_cat_transparent">#77F99B7D</color>
 </resources>
