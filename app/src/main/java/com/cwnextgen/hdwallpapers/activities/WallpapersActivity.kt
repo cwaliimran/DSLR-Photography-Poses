@@ -189,7 +189,6 @@ class WallpapersActivity : BaseActivity(), OnItemClick {
 
     private fun fetchDataFromServer() {
         Log.d(TAG, "fetchData: live")
-
         val postsCollection = firestore().collection(category.id.toString())
 
 // Perform a query to retrieve the posts
@@ -201,10 +200,14 @@ class WallpapersActivity : BaseActivity(), OnItemClick {
                     wallpaperModel.add(model)
                 }
             }
-            isFetchedOnline = true
+            isFetchedOnline = true //change value to true before inserting in room database so listener will not duplicate data
+            if (wallpaperModel.isEmpty()){
+                showToast(getString(R.string.no_data_found))
+            }
             adapter.updateData(wallpaperModel)
             viewModelRoom.insertWallpapers(wallpaperModel)
             displayLoading(false)
+
         }.addOnFailureListener { e ->
             displayLoading(false)
             // Handle any errors that occurred while querying the posts collection

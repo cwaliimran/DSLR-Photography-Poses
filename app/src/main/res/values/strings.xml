@@ -39,4 +39,5 @@
     <string name="english">English</string>
     <string name="urdu">اردو</string>
     <string name="hindi">हिंदी</string>
+    <string name="no_data_found">No data found</string>
 </resources>

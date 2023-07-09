@@ -116,7 +116,7 @@ class UploadsActivity : BaseActivity() {
             displayLoading()
 
             val storageRef = FirebaseStorage.getInstance().reference
-            val imageRef = storageRef.child("appwallpapers/${generateUUID()}+.jpg")
+            val imageRef = storageRef.child("appwallpapers/${generateUUID()}.jpg")
 
             imageRef.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
                 // Image upload successful

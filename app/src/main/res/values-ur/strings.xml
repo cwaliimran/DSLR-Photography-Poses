@@ -29,4 +29,5 @@
     <string name="english">انگریزی</string>
     <string name="urdu">اردو</string>
     <string name="hindi">हिंदी</string>
+    <string name="no_data_found">کوئی ڈیٹا نہیں ملا</string>
 </resources>
