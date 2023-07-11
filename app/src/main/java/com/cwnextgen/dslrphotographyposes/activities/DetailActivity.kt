@@ -61,7 +61,7 @@ class DetailActivity : BaseActivity() {
     override fun clicks() {
 
         binding.ivShare.setOnClickListener {
-            getBitmapFromView(binding.cardView)
+            getBitmapFromView(binding.imageView)
         }
 
         binding.saveImageButton.setOnClickListener {
@@ -237,7 +237,6 @@ class DetailActivity : BaseActivity() {
                     Log.d(TAG, "Ad was dismissed.")
                     // Don't forget to set the ad reference to null so you don't show the ad a second time.
                     mRewardedAd = null
-                    userReward(type)
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError) {
@@ -256,7 +255,7 @@ class DetailActivity : BaseActivity() {
                 fun onUserEarnedReward(rewardItem: RewardItem) {
                     // Handle the reward
                     Log.d(TAG, "The user was rewarded with ${rewardItem.amount} ${rewardItem.type}")
-                    userReward(type)
+                  //  userReward(type)
                 }
             })
         } else {
