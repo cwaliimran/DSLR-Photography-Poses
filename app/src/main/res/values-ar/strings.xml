@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="done">منتهي</string>
+    <string name="permissions">إذن مطلوب</string>
+    <string name="permission_needed">الرجاء منح الإذن</string>
+    <string name="open_settings">أفتح الإعدادات</string>
+    <string name="cancel">يلغي</string>
+    <string name="share_text">المزيد من هذا القبيل</string>
+    <string name="upload">رفع</string>
+    <string name="label_select_from">اختر من</string>
+    <string name="label_gallery">صالة عرض</string>
+    <string name="label_camera">آلة تصوير</string>
+    <string name="label_cancel">يلغي</string>
+    <string name="add">يضيف</string>
+    <string name="upload_msg">يمكنك تحميل أفضل اختياراتك لاستخدامها لاحقًا ومشاركتها مع الجمهور.</string>
+    <string name="share">شارك مع الاصدقاء</string>
+    <string name="languages">اللغات</string>
+    <string name="more">المزيد من هذا القبيل</string>
+    <string name="rate_app">قيم التطبيق</string>
+    <string name="more_apps">المزيد من التطبيقات </string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="english">English</string>
+    <string name="urdu">اردو</string>
+    <string name="hindi">हिंदी</string>
+    <string name="arabic">عربي</string>
+    <string name="no_data_found">لاتوجد بيانات</string>
+</resources>

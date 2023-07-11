@@ -207,9 +207,9 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
 
     private fun showLanguageSelectionDialog() {
         val languages = arrayOf(
-            getString(R.string.english), getString(R.string.urdu), getString(R.string.hindi)
+            getString(R.string.english), getString(R.string.urdu), getString(R.string.hindi), getString(R.string.arabic)
         )
-        val languagesShort = arrayOf("en", "ur", "hi")
+        val languagesShort = arrayOf("en", "ur", "hi","ar")
         prevLang = AppClass.sharedPref.getString(AppConstants.APP_LANG, "en")
 
         val dialogBuilder = AlertDialog.Builder(this)

@@ -137,7 +137,7 @@ fun Context.openPlayStoreForRating() {
 }
 
 fun Context.openPlayStoreForMoreApps() {
-    val publisherName = "cwnextgen"
+    val publisherName = "NextGen Apps Developer"
     try {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:$publisherName")))
     } catch (e: ActivityNotFoundException) {
