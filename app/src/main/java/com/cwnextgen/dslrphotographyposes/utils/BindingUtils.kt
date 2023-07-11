@@ -13,9 +13,9 @@ class BindingUtils {
         @BindingAdapter("android:loadImage")
         fun loadImage(view: ImageView, imageUrl: String?) {
             Glide.with(view.context).load(imageUrl)
-                .transition(withCrossFade())
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.ic_launcher_foreground)
+//                .transition(withCrossFade())
+//                .placeholder(R.drawable.placeholder)
+//                .error(R.drawable.ic_launcher_foreground)
                 .into(view)
         }
     }

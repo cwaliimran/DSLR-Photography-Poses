@@ -8,4 +8,5 @@
     <color name="primary">#F99B7D</color>
     <color name="secondary">#F68967</color>
     <color name="bg_cat_transparent">#77F99B7D</color>
+    <color name="grey">#709D9C99</color>
 </resources>

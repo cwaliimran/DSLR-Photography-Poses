@@ -36,7 +36,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
                 android:loadImage="@{data.imageUrl}"
-                android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
 
         </androidx.cardview.widget.CardView>

@@ -13,6 +13,6 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
-rootProject.name = "DSLR Photography  Poses"
+rootProject.name = "DSLR Photography Poses"
 include ':app'
 include ':network'
