@@ -1,31 +1,13 @@
 <resources>
     <string name="app_name" translatable="false">DSLR Photography Poses</string>
 
-<!--    live admob ids-->
-    <string name="admob_app_id" translatable="false">ca-app-pub-6434592293341843~7395221089</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/4257658521</string>
-    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/6692250177</string>
-    <string name="reward_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/4066086836</string>
-    <string name="native_custom_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/3716062033</string>
-    <string name="openapp_ad_unit_id" translatable="false">ca-app-pub-6434592293341843/6500678480</string>
-
-<!-- test ids -->
-<!--
-    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="openapp_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
-    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="reward_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
-    <string name="native_custom_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/2247696110</string>-->
-
-
     <string name="dash" translatable="false">-</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="done">Done</string>
-    <string name="permissions">Permission Needed</string>
-    <string name="permission_needed">Please grant permission</string>
-    <string name="open_settings">Open settings</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="done">Fait</string>
+    <string name="permissions">Autorisation requise</string>
+    <string name="permission_needed">Veuillez accorder la permission</string>
+    <string name="open_settings">Ouvrir les paramètres</string>
     <string name="cancel">Cancel</string>
     <string name="share_text" translatable="false">"Download the best app."</string>
     <string name="upload">Upload</string>

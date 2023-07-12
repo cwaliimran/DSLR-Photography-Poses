@@ -92,17 +92,16 @@ class CategoriesActivity : BaseActivity(), OnItemClick {
 
     override fun initData() {
         //  mainModel.add(CategoriesModel(0, "Available Offline", R.drawable.three_d))
-        mainModel.add(CategoriesModel(1, "Beaches", R.drawable.logo))
-        mainModel.add(CategoriesModel(2, "Coffee shops and restaurants", R.drawable.logo))
-        mainModel.add(CategoriesModel(3, "Deserts", R.drawable.logo))
-        mainModel.add(CategoriesModel(4, "Farmland or vineyards", R.drawable.logo))
-        mainModel.add(CategoriesModel(5, "Historical buildings Monuments", R.drawable.logo))
-        mainModel.add(CategoriesModel(6, "Indoor Shot", R.drawable.logo))
-        mainModel.add(CategoriesModel(7, "Mountain ranges", R.drawable.logo))
-        mainModel.add(CategoriesModel(8, "On Road", R.drawable.logo))
-        mainModel.add(CategoriesModel(9, "Outdoor Shot", R.drawable.logo))
-        mainModel.add(CategoriesModel(10, "Park/Garden", R.drawable.logo))
-        mainModel.add(CategoriesModel(11, "Studio", R.drawable.logo))
+        mainModel.add(CategoriesModel(1, getString(R.string.beaches), R.drawable.logo))
+        mainModel.add(CategoriesModel(2, getString(R.string.coffee_shops_and_restaurants), R.drawable.logo))
+        mainModel.add(CategoriesModel(3, getString(R.string.deserts), R.drawable.logo))
+        mainModel.add(CategoriesModel(4, getString(R.string.farmland_or_vineyards), R.drawable.logo))
+        mainModel.add(CategoriesModel(6, getString(R.string.indoor_shot), R.drawable.logo))
+        mainModel.add(CategoriesModel(7, getString(R.string.mountain_ranges), R.drawable.logo))
+        mainModel.add(CategoriesModel(8, getString(R.string.on_road), R.drawable.logo))
+        mainModel.add(CategoriesModel(9, getString(R.string.outdoor_shot), R.drawable.logo))
+        mainModel.add(CategoriesModel(10, getString(R.string.park_garden), R.drawable.logo))
+        mainModel.add(CategoriesModel(11, getString(R.string.studio), R.drawable.logo))
 
     }
 

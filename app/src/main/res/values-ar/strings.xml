@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">DSLR Photography Poses</string>
+
+    <string name="dash" translatable="false">-</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
     <string name="done">منتهي</string>
@@ -7,24 +9,36 @@
     <string name="permission_needed">الرجاء منح الإذن</string>
     <string name="open_settings">أفتح الإعدادات</string>
     <string name="cancel">يلغي</string>
-    <string name="share_text">المزيد من هذا القبيل</string>
+    <string name="share_text" translatable="false">"Download the best app."</string>
     <string name="upload">رفع</string>
+
     <string name="label_select_from">اختر من</string>
     <string name="label_gallery">صالة عرض</string>
     <string name="label_camera">آلة تصوير</string>
     <string name="label_cancel">يلغي</string>
     <string name="add">يضيف</string>
     <string name="upload_msg">يمكنك تحميل أفضل اختياراتك لاستخدامها لاحقًا ومشاركتها مع الجمهور.</string>
-    <string name="share">شارك مع الاصدقاء</string>
+    <string name="share">يشارك</string>
     <string name="languages">اللغات</string>
-    <string name="more">المزيد من هذا القبيل</string>
+    <string name="more">أكثر</string>
     <string name="rate_app">قيم التطبيق</string>
-    <string name="more_apps">المزيد من التطبيقات </string>
+    <string name="more_apps">تطبيقات أكثر</string>
     <string name="contact_us">اتصل بنا</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
-    <string name="english">English</string>
-    <string name="urdu">اردو</string>
-    <string name="hindi">हिंदी</string>
+    <string name="english">إنجليزي</string>
+    <string name="urdu">الأردية</string>
+    <string name="hindi">هندي</string>
     <string name="arabic">عربي</string>
     <string name="no_data_found">لاتوجد بيانات</string>
+    <string name="default_notification_channel_id" translatable="false">Default</string>
+    <string name="beaches">الشواطئ</string>
+    <string name="coffee_shops_and_restaurants">المقاهي والمطاعم</string>
+    <string name="deserts">الصحارى</string>
+    <string name="farmland_or_vineyards">الأراضي الزراعية أو مزارع الكروم</string>
+    <string name="indoor_shot">لقطة داخلية</string>
+    <string name="mountain_ranges">سلاسل الجبال</string>
+    <string name="on_road">على الطريق</string>
+    <string name="outdoor_shot">لقطة في الهواء الطلق</string>
+    <string name="park_garden">حديقة / حديقة</string>
+    <string name="studio">ستوديو</string>
 </resources>

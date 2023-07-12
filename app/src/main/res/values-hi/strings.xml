@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name" translatable="false">DSLR Photography Poses</string>
 
+    <string name="dash" translatable="false">-</string>
     <string name="yes">हाँ</string>
     <string name="no">नहीं</string>
     <string name="done">पूर्ण</string>
@@ -8,23 +9,36 @@
     <string name="permission_needed">कृपया अनुमति प्रदान करें</string>
     <string name="open_settings">खुली सेटिंग</string>
     <string name="cancel">रद्द करना</string>
+    <string name="share_text" translatable="false">"Download the best app."</string>
     <string name="upload">डालना</string>
+
     <string name="label_select_from">से चयन करें</string>
     <string name="label_gallery">गेलरी</string>
     <string name="label_camera">कैमरा</string>
     <string name="label_cancel">रद्द करना</string>
     <string name="add">जोड़ना</string>
-    <string name="upload_msg">आप बाद में उपयोग करने और जनता के साथ साझा करने के लिए वॉलपेपर का अपना सर्वश्रेष्ठ चयन अपलोड कर सकते हैं।</string>
-    <string name="share">दोस्तों के साथ बांटें</string>
+    <string name="upload_msg">आप उन्हें बाद में उपयोग करने और जनता के साथ साझा करने के लिए अपना सर्वश्रेष्ठ चयन अपलोड कर सकते हैं।</string>
+    <string name="share">शेयर करना</string>
     <string name="languages">बोली</string>
     <string name="more">अधिक</string>
     <string name="rate_app">एप्प का मूल्यांकन</string>
     <string name="more_apps">और ऐप</string>
     <string name="contact_us">संपर्क करें</string>
     <string name="privacy_policy">गोपनीयता नीति</string>
-    <string name="english">English</string>
-    <string name="urdu">اردو</string>
+    <string name="english">अंग्रेज़ी</string>
+    <string name="urdu">उर्दू</string>
     <string name="hindi">हिंदी</string>
-    <string name="arabic">عربي</string>
+    <string name="arabic">अरब</string>
     <string name="no_data_found">डाटा प्राप्त नहीं हुआ</string>
+    <string name="default_notification_channel_id" translatable="false">Default</string>
+    <string name="beaches">समुद्र तटों</string>
+    <string name="coffee_shops_and_restaurants">कॉफी की दुकानें और रेस्तरां</string>
+    <string name="deserts">रेगिस्तान</string>
+    <string name="farmland_or_vineyards">खेत या अंगूर के बाग</string>
+    <string name="indoor_shot">इनडोर शॉट</string>
+    <string name="mountain_ranges">पर्वत श्रृंखलाएं</string>
+    <string name="on_road">सड़क पर</string>
+    <string name="outdoor_shot">आउटडोर शॉट</string>
+    <string name="park_garden">पार्क/उद्यान</string>
+    <string name="studio">STUDIO</string>
 </resources>
