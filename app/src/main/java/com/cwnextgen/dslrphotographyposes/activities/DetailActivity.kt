@@ -59,8 +59,7 @@ class DetailActivity : BaseActivity() {
     }
 
     override fun clicks() {
-
-        // TODO: crash check
+        
         binding.ivShare.setOnClickListener {
             getBitmapFromView(binding.imageView)
         }

@@ -38,12 +38,12 @@ class ImagesActivity : BaseActivity(), OnItemClick {
     private val TAG = ImagesActivity::class.java.simpleName
     lateinit var adapter: ImagesAdapter
     private var imagesModel = mutableListOf<ImagesModel>()
+    private val viewModelRoom: ImagesViewModel by viewModels()
     private var category = CategoriesModel()
     private var mInterstitialAd: InterstitialAd? = null
     lateinit var adRequest: AdRequest
-    lateinit var adRequest1: AdRequest
 
-    private val viewModelRoom: ImagesViewModel by viewModels()
+    lateinit var adRequest1: AdRequest
     private var isFetchedOnline = false
     override fun onCreate() {
 
@@ -158,7 +158,6 @@ class ImagesActivity : BaseActivity(), OnItemClick {
 
     private fun fetchData() {
         imagesModel.clear()
-
         displayLoading()
         //get data from room database if available against current category
         lifecycleScope.launch {
